@@ -58,6 +58,17 @@
     --line:rgba(255,243,226,0.14);
     --line-strong:rgba(255,243,226,0.30);
     --ink:#120819;
+    /* ---- borrowed from Instagram's mark, used only for the "follow us"
+       moments so it reads as a deliberate nod, not a re-theme ---- */
+    --ig-1:#feda75;
+    --ig-2:#fa7e1e;
+    --ig-3:#d62976;
+    --ig-4:#962fbf;
+    --ig-5:#4f5bd5;
+    --ig-gradient:linear-gradient(45deg, var(--ig-1), var(--ig-2), var(--ig-3), var(--ig-4), var(--ig-5));
+    --card-bg:rgba(255,255,255,0.045);
+    --card-border:rgba(255,255,255,0.09);
+    --card-radius:20px;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth; background:var(--night);}
@@ -416,24 +427,95 @@
     max-width:56ch; margin-bottom:8px;
   }
 
-  /* store badges, lifted from the homepage panel treatment */
+  /* ---------- ACTION BUTTONS ----------
+     Rounded, soft-elevation pills rather than the site's usual hard pixel
+     shadow: the brief for these pages specifically is a friendlier, more
+     "tap me" feel, closer to a Follow / Get button than a retro CTA. */
+  .cta-row{display:flex; flex-wrap:wrap; gap:12px; align-items:center;}
+  .btn-primary, .btn-instagram{
+    display:inline-flex; align-items:center; gap:9px;
+    font-family:'Inter',sans-serif;
+    font-size:14.5px; font-weight:700;
+    padding:13px 24px;
+    border-radius:999px;
+    border:none;
+    cursor:pointer;
+    transition:transform .16s ease, box-shadow .16s ease, filter .16s ease;
+  }
+  .btn-primary{
+    background:var(--gold); color:var(--ink);
+    box-shadow:0 6px 18px rgba(255,182,39,0.28);
+  }@media (hover:hover){ .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(255,182,39,0.38);} }
+  .btn-primary:active{transform:translateY(0);}
+
+  /* the one button on the page allowed to borrow Instagram's mark: a real
+     5-stop gradient at 45deg, matching the app icon everyone already knows,
+     so it reads instantly as "this goes to Instagram" before anyone reads
+     the label. */
+  .btn-instagram{
+    background:var(--ig-gradient);
+    background-size:160% 160%;
+    background-position:0% 50%;
+    color:#fff;
+    box-shadow:0 8px 22px rgba(214,41,118,0.38);
+  }@media (hover:hover){ .btn-instagram:hover{transform:translateY(-2px); box-shadow:0 12px 28px rgba(214,41,118,0.48); background-position:100% 50%;} }
+  .btn-instagram:active{transform:translateY(0);}
+  .btn-instagram .mi{width:16px; height:16px;}
+
+  /* ---------- CARD BASE ----------
+     One shared surface, reused by the store panel, the Instagram card, the
+     feature grid and the steps: rounded corners and a soft shadow instead
+     of the hard pixel-bordered panels used elsewhere on the site. */
+  .card{
+    border-radius:var(--card-radius);
+    background:var(--card-bg);
+    border:1px solid var(--card-border);
+    box-shadow:0 14px 34px rgba(0,0,0,0.34);
+  }
+
+  /* ---------- FOLLOW CARD ----------
+     The page's single most important action, so it gets its own section
+     right under the hero: a small profile card in the shape everyone
+     already reads as "this is a social account", with a story-ring avatar
+     and a gradient Follow button, not a text link buried in a paragraph. */
+  .ig-card{
+    padding:clamp(22px, 4vw, 30px);
+    display:flex; flex-direction:column; gap:16px;
+    max-width:620px;
+  }
+  .ig-card-top{display:flex; align-items:center; gap:14px;}
+  .ig-avatar{
+    flex:0 0 auto;
+    width:56px; height:56px; border-radius:50%; padding:3px;
+    background:conic-gradient(from 180deg, var(--ig-1), var(--ig-2), var(--ig-3), var(--ig-4), var(--ig-5), var(--ig-1));
+  }
+  .ig-avatar-inner{
+    width:100%; height:100%; border-radius:50%;
+    background:var(--night);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .ig-avatar-inner svg{width:56%; height:32%;}
+  .ig-id{display:flex; flex-direction:column; min-width:0;}
+  .ig-id strong{font-family:'Fraunces',serif; font-weight:600; font-style:italic; font-size:19px;}
+  .ig-id span{
+    font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.08em;
+    color:var(--cream-dim); margin-top:2px;
+  }
+  .ig-card p.ig-blurb{font-size:14px; line-height:1.65; color:var(--cream-dim); max-width:52ch;}
+
+  /* store badges: same card, no more hard pixel border */
   .stores{
     position:relative;
     max-width:460px;
-    border:2px solid var(--cream);
-    box-shadow:4px 4px 0 #1a1006;
-    background:rgba(255,243,226,0.04);
-  }
-  .stores-body{
-    display:flex; flex-direction:column;
     padding:clamp(14px, 4vw, 18px);
+    display:flex; flex-direction:column;
     gap:clamp(11px, 3vw, 14px);
   }
   .store-badges{display:flex; gap:10px; align-items:stretch;}
   .store-badge{
     flex:1 1 0; min-width:0; max-width:168px;
-    display:block;
-    transition:transform .12s ease;
+    display:block; border-radius:8px; overflow:hidden;
+    transition:transform .16s ease;
   }@media (hover:hover){ .store-badge:hover{transform:translateY(-2px);} }
   .store-badge svg{display:block; width:100%; height:auto;}
   .stores-note{
@@ -442,52 +524,49 @@
     color:rgba(255,243,226,0.62);
   }
 
-  /* feature list, same construction as the homepage's "About" grid */
-  .feature-list{display:flex; flex-direction:column; gap:0;}
-  .feature{
-    display:flex; align-items:flex-start; gap:18px;
-    padding:22px 4px;
-    border-top:1px solid var(--line);
+  /* feature grid: two-up cards rather than a stacked list of rows, closer
+     to how Instagram lays out feature tiles on its own download pages */
+  .feature-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:14px;
   }
-  .feature:last-child{border-bottom:1px solid var(--line);}
-  .feature .icon{
-    width:38px; height:38px; flex-shrink:0;
-    border:1px solid var(--line-strong);
-    border-radius:10px;
+  @media (max-width:640px){ .feature-grid{grid-template-columns:1fr;} }
+  .feature-card{
+    padding:22px;
+    display:flex; flex-direction:column; gap:12px;
+    transition:transform .16s ease, border-color .16s ease;
+  }@media (hover:hover){ .feature-card:hover{transform:translateY(-3px); border-color:rgba(255,255,255,0.18);} }
+  .feature-card .icon{
+    width:42px; height:42px; flex-shrink:0;
+    border-radius:12px;
     display:flex; align-items:center; justify-content:center;
-    font-size:17px;
-    background:linear-gradient(135deg, rgba(255,182,39,0.12), rgba(255,90,95,0.12));
+    font-size:19px;
+    background:linear-gradient(135deg, rgba(255,182,39,0.16), rgba(255,90,95,0.16));
   }
-  .feature h3{font-family:'Fraunces',serif; font-weight:600; font-size:16px; margin-bottom:4px;}
-  .feature p{font-size:13.5px; color:var(--cream-dim); max-width:48ch;}
+  .feature-card h3{font-family:'Fraunces',serif; font-weight:600; font-size:16px; margin-bottom:4px;}
+  .feature-card p{font-size:13.5px; color:var(--cream-dim);}
 
-  /* how it works: three pixel-bordered steps */
+  /* how it works: same rounded card, numbered pill instead of a hard tag */
   .steps{
-    display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:14px;
   }
   @media (max-width:700px){ .steps{grid-template-columns:1fr;} }
-  .step{
-    border:2px solid var(--line-strong);
-    border-radius:10px;
-    padding:20px;
-    background:rgba(255,243,226,0.03);
-  }
+  .step{padding:22px;}
   .step-num{
-    display:inline-block;
-    font-family:'Press Start 2P',monospace;
-    font-size:10px;
+    display:inline-flex; align-items:center; justify-content:center;
+    width:30px; height:30px;
+    font-family:'Space Mono',monospace; font-weight:700;
+    font-size:12px;
     color:var(--ink);
     background:var(--gold);
-    padding:5px 8px;
-    border-radius:6px;
+    border-radius:50%;
     margin-bottom:14px;
   }
   .step h3{font-family:'Fraunces',serif; font-weight:600; font-size:16px; margin-bottom:6px;}
   .step p{font-size:13.5px; color:var(--cream-dim);}
 
-  /* faq */
-  .faq-item{padding:18px 0; border-top:1px solid var(--line);}
-  .faq-item:last-child{border-bottom:1px solid var(--line);}
+  /* faq: individually rounded cards instead of a bordered list */
+  .faq-item{padding:18px 22px;}
+  .faq-item + .faq-item{margin-top:10px;}
   .faq-item h3{font-family:'Fraunces',serif; font-weight:600; font-style:italic; font-size:15.5px; margin-bottom:6px;}
   .faq-item p{font-size:13.5px; color:var(--cream-dim); max-width:60ch;}
 
@@ -498,17 +577,7 @@
     max-width:900px; margin:0 auto;
   }
   .dl-cta p{color:var(--cream-dim); font-size:13.5px; margin-bottom:18px;}
-  .btn-primary{
-    display:inline-flex; align-items:center; gap:10px;
-    background:var(--gold); color:var(--ink);
-    font-family:'Space Mono',monospace;
-    font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
-    padding:14px 26px;
-    border:2px solid var(--ink);
-    box-shadow:4px 4px 0 #1a1006;
-    transition:transform .12s ease, box-shadow .12s ease;
-  }@media (hover:hover){ .btn-primary:hover{transform:translate(-2px,-2px); box-shadow:6px 6px 0 #1a1006;} }
-  .btn-primary:active{transform:translate(0,0); box-shadow:2px 2px 0 #1a1006;}
+  .dl-cta .cta-row{justify-content:center;}
 
   .shine-word{
     font-weight:700;
@@ -645,13 +714,46 @@
     <h1 class="page-title">Get the app.</h1>
     <p class="page-kicker">A+ Sunsets isn't live yet. It launches <strong>August 10, 2026</strong>, and here's exactly what you're getting, so the two minutes it takes to sign up feel worth it.</p>
     <div class="page-rule" aria-hidden="true"></div>
+    <div class="cta-row" style="margin-top:24px;">
+      <a class="btn-primary" href="index.html#signup">
+        <svg class="mi" viewBox="0 0 20 20" aria-hidden="true" style="width:15px;height:15px;"><use href="#i-bell"/></svg>
+        Notify me
+      </a>
+      <a class="btn-instagram" href="https://www.instagram.com/2as_inc/" target="_blank" rel="noopener noreferrer">
+        <svg class="mi" viewBox="0 0 20 20" aria-hidden="true"><use href="#i-instagram"/></svg>
+        Follow @2as_inc
+      </a>
+    </div>
   </div>
+
+  <section class="dl-section" aria-labelledby="dl-follow-h">
+    <h2 id="dl-follow-h" class="sr-only">Follow A+ Sunsets on Instagram</h2>
+    <div class="ig-card card">
+      <div class="ig-card-top">
+        <span class="ig-avatar" aria-hidden="true">
+          <span class="ig-avatar-inner">
+            <svg viewBox="0 0 60 34" fill="none" aria-hidden="true"><use href="#arc-mark"/></svg>
+          </span>
+        </span>
+        <div class="ig-id">
+          <strong>@2as_inc</strong>
+          <span>A+ Sunsets on Instagram</span>
+        </div>
+      </div>
+      <p class="ig-blurb">This is where the countdown actually lives: early looks at the gallery, real sunsets from real people testing it, and the first post the moment it's live on August 10.</p>
+      <div class="cta-row">
+        <a class="btn-instagram" href="https://www.instagram.com/2as_inc/" target="_blank" rel="noopener noreferrer">
+          <svg class="mi" viewBox="0 0 20 20" aria-hidden="true"><use href="#i-instagram"/></svg>
+          Follow @2as_inc
+        </a>
+      </div>
+    </div>
+  </section>
 
   <section class="dl-section" aria-labelledby="dl-stores-h">
     <h2 id="dl-stores-h" class="display">Where it'll live.</h2>
     <p class="lead">iOS and Android, from day one. The badges below aren't wired up to the real stores yet. Tap either one and we'll take you to the signup instead, so you're first in line when they go live.</p>
-    <div class="stores">
-      <div class="stores-body">
+    <div class="stores card">
         <div class="store-badges">
           <a class="store-badge" href="index.html#signup" aria-label="Download on the App Store, available August 10">
             <svg viewBox="0 0 135 40" role="img" aria-hidden="true">
@@ -678,41 +780,32 @@
           </a>
         </div>
         <p class="stores-note">not live yet, the badges will link to the real stores on launch day, August 10, 2026.</p>
-      </div>
     </div>
   </section>
 
   <section class="dl-section" aria-labelledby="dl-features-h">
     <h2 id="dl-features-h" class="display">What's actually in it.</h2>
     <p class="lead">One app, built for one thing: the sky you stopped for. No feed of everything else.</p>
-    <div class="feature-list">
-      <div class="feature">
+    <div class="feature-grid">
+      <div class="feature-card card">
         <div class="icon" aria-hidden="true">🌇</div>
-        <div>
-          <h3>Personal sky gallery</h3>
-          <p>Every sunset you save is organized automatically by place and date, sitting in <span class="shine-word">YOUR</span> profile, not a shared public feed.</p>
-        </div>
+        <h3>Personal sky gallery</h3>
+        <p>Every sunset you save is organized automatically by place and date, sitting in <span class="shine-word">YOUR</span> profile, not a shared public feed.</p>
       </div>
-      <div class="feature">
+      <div class="feature-card card">
         <div class="icon" aria-hidden="true">📍</div>
-        <div>
-          <h3>Location tagged</h3>
-          <p>Every photo remembers where you were standing, so you can see where <span class="shine-word">YOUR</span> best skies happened and go back.</p>
-        </div>
+        <h3>Location tagged</h3>
+        <p>Every photo remembers where you were standing, so you can see where <span class="shine-word">YOUR</span> best skies happened and go back.</p>
       </div>
-      <div class="feature">
+      <div class="feature-card card">
         <div class="icon" aria-hidden="true">✨</div>
-        <div>
-          <h3>Built for one thing</h3>
-          <p>Scroll a feed that's nothing but <span class="shine-word">YOUR</span> sunsets: no ads, no strangers, no algorithm deciding what you see.</p>
-        </div>
+        <h3>Built for one thing</h3>
+        <p>Scroll a feed that's nothing but <span class="shine-word">YOUR</span> sunsets: no ads, no strangers, no algorithm deciding what you see.</p>
       </div>
-      <div class="feature">
+      <div class="feature-card card">
         <div class="icon" aria-hidden="true">🔔</div>
-        <div>
-          <h3>Launch-day notification</h3>
-          <p>Leave your email once and we send exactly one message, the day it goes live. Nothing before, nothing after.</p>
-        </div>
+        <h3>Launch-day notification</h3>
+        <p>Leave your email once and we send exactly one message, the day it goes live. Nothing before, nothing after.</p>
       </div>
     </div>
   </section>
@@ -721,17 +814,17 @@
     <h2 id="dl-steps-h" class="display">How it'll work.</h2>
     <p class="lead">Three steps, start to finish.</p>
     <div class="steps">
-      <div class="step">
+      <div class="step card">
         <span class="step-num">01</span>
         <h3>Catch the sky</h3>
         <p>Open the app when a sunset stops you, snap it, and save it straight into your gallery.</p>
       </div>
-      <div class="step">
+      <div class="step card">
         <span class="step-num">02</span>
         <h3>It tags itself</h3>
         <p>Place and date are added automatically, so every sky lands sorted without any extra work.</p>
       </div>
-      <div class="step">
+      <div class="step card">
         <span class="step-num">03</span>
         <h3>Watch it grow</h3>
         <p>Scroll back through your own collection any time. It stays brighter and longer than the eleven minutes it actually lasted.</p>
@@ -741,19 +834,19 @@
 
   <section class="dl-section" aria-labelledby="dl-faq-h">
     <h2 id="dl-faq-h" class="display">Questions, answered.</h2>
-    <div class="faq-item">
+    <div class="faq-item card">
       <h3>When does it launch?</h3>
       <p>August 10, 2026, on both iOS and Android. The date moved from August 1 while we finished acquiring some software licences the app depends on.</p>
     </div>
-    <div class="faq-item">
+    <div class="faq-item card">
       <h3>Is it free?</h3>
       <p>Yes. There's nothing to buy here. This page and the rest of the site collect nothing beyond the email you choose to leave for the launch notice.</p>
     </div>
-    <div class="faq-item">
+    <div class="faq-item card">
       <h3>Do I need an account to use it?</h3>
       <p>Accounts open at launch, alongside the app. Nothing to set up before then.</p>
     </div>
-    <div class="faq-item">
+    <div class="faq-item card">
       <h3>What happens with my email?</h3>
       <p>It's held by our form processor, Formspree, and used once, to send the launch notice on August 10. Write to <a class="shine-word" href="mailto:awesomesunsets22@gmail.com?subject=A%2B%20Sunsets">awesomesunsets22@gmail.com</a> any time to see or delete it.</p>
     </div>
@@ -761,10 +854,16 @@
 
   <div class="dl-cta">
     <p>Want to be first through the door on launch day?</p>
-    <a class="btn-primary" href="index.html#signup">
-      <svg class="mi" viewBox="0 0 20 20" aria-hidden="true" style="width:15px;height:15px;"><use href="#i-bell"/></svg>
-      Notify me
-    </a>
+    <div class="cta-row">
+      <a class="btn-primary" href="index.html#signup">
+        <svg class="mi" viewBox="0 0 20 20" aria-hidden="true" style="width:15px;height:15px;"><use href="#i-bell"/></svg>
+        Notify me
+      </a>
+      <a class="btn-instagram" href="https://www.instagram.com/2as_inc/" target="_blank" rel="noopener noreferrer">
+        <svg class="mi" viewBox="0 0 20 20" aria-hidden="true"><use href="#i-instagram"/></svg>
+        Follow @2as_inc
+      </a>
+    </div>
   </div>
 </main>
 
