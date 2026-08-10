@@ -1987,7 +1987,7 @@
 
   try {
     if (localStorage.getItem(STORAGE_KEY)) {
-      note.textContent = "You're already on the list. See you August 12 🌅";
+      note.textContent = "आप पहले से सूची में शामिल हैं। 12 अगस्त को मिलते हैं 🌅";
     }
   } catch (e) { /* localStorage unavailable, non-fatal */ }
 
@@ -2013,7 +2013,7 @@
 
   function setMenu(open){
     menuBtn.setAttribute('aria-expanded', String(open));
-    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menuBtn.setAttribute('aria-label', open ? 'मेनू बंद करें' : 'मेनू खोलें');
     menuPanel.hidden = !open;
   }
 
@@ -2236,13 +2236,13 @@
 
     var email = form.email.value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      note.textContent = "That doesn't look like a valid email. Mind checking it?";
+      note.textContent = "यह एक सही ईमेल जैसा नहीं लग रहा। एक बार जाँच लेंगे?";
       return;
     }
     if (form.company.value) return; // honeypot tripped: fail silently, no error shown to bots
 
     btn.disabled = true;
-    btn.textContent = "Sending…";
+    btn.textContent = "भेजा जा रहा है…";
 
     try {
       var res = await fetch(form.action, {
@@ -2251,7 +2251,7 @@
         headers: { "Accept": "application/json" }
       });
       if (!res.ok) throw new Error("Request failed");
-      note.textContent = "You're on the list. See you August 12th 🌅";
+      note.textContent = "आप सूची में शामिल हो गए हैं। 12 अगस्त को मिलते हैं 🌅";
       try { localStorage.setItem(STORAGE_KEY, "1"); } catch (e) {}
       openModal(email);
       form.reset();
@@ -2263,16 +2263,16 @@
       // DOM calls rather than innerHTML since `email` is user input and this
       // runs on every failure, not just validated-and-caught ones.
       note.textContent = "";
-      note.appendChild(document.createTextNode("That didn't go through, probably heavy traffic on our end. "));
+      note.appendChild(document.createTextNode("वह नहीं पहुँचा, शायद हमारी तरफ़ ज़्यादा ट्रैफ़िक की वजह से। "));
       var fallbackLink = document.createElement('a');
       fallbackLink.href = "mailto:awesomesunsets22@gmail.com?subject=" + encodeURIComponent("A+ Sunsets signup") + "&body=" + encodeURIComponent("Please add me to the list: " + email);
       fallbackLink.className = "shine-word";
-      fallbackLink.textContent = "Tap here to email us directly";
+      fallbackLink.textContent = "सीधे हमें ईमेल करने के लिए यहाँ टैप करें";
       note.appendChild(fallbackLink);
-      note.appendChild(document.createTextNode(" and we'll add you by hand."));
+      note.appendChild(document.createTextNode(" और हम आपको खुद जोड़ देंगे।"));
     } finally {
       btn.disabled = false;
-      btn.textContent = "Notify me";
+      btn.textContent = "मुझे सूचित करें";
     }
   });
 </script>

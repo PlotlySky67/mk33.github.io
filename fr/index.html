@@ -1568,7 +1568,7 @@
   <span class="wipe-sea"></span>
   <div class="wipe-copy">
     <svg class="wipe-mark" viewBox="0 0 60 34" fill="none"><use href="#arc-mark"/></svg>
-    <p class="wipe-label">taking you to <span class="wipe-dest" id="wipe-dest">the next page</span></p>
+    <p class="wipe-label">direction <span class="wipe-dest" id="wipe-dest">la page suivante</span></p>
     <span class="wipe-bar"><i></i></span>
   </div>
 </div>
@@ -1737,7 +1737,7 @@
             // zeroes on screen for the rest of the app's life.
             if (diff === 0){
               if (box) box.classList.add('is-live');
-              if (sr)  sr.textContent = 'A+ Sunsets is out now.';
+              if (sr)  sr.textContent = 'A+ Sunsets est disponible dès maintenant.';
               stop();
               return;
             }
@@ -2236,7 +2236,7 @@
 
     var email = form.email.value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      note.textContent = "That doesn't look like a valid email. Mind checking it?";
+      note.textContent = "Cet email n'a pas l'air valide. Pouvez-vous vérifier ?";
       return;
     }
     if (form.company.value) return; // honeypot tripped: fail silently, no error shown to bots
@@ -2265,7 +2265,7 @@
       note.textContent = "";
       note.appendChild(document.createTextNode("Ça n'est pas passé, sans doute un pic de trafic de notre côté. "));
       var fallbackLink = document.createElement('a');
-      fallbackLink.href = "mailto:awesomesunsets22@gmail.com?subject=" + encodeURIComponent("A+ Sunsets signup") + "&body=" + encodeURIComponent("Please add me to the list: " + email);
+      fallbackLink.href = "mailto:awesomesunsets22@gmail.com?subject=" + encodeURIComponent("Inscription A+ Sunsets") + "&body=" + encodeURIComponent("Merci de m'ajouter à la liste : " + email);
       fallbackLink.className = "shine-word";
       fallbackLink.textContent = "Appuyez ici pour nous écrire directement";
       note.appendChild(fallbackLink);
