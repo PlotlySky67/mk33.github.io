@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Our Product — A+ Sunsets</title>
-<meta name="description" content="A+ Sunsets is a gallery app for people who stop and watch the sky. Launching August 1, 2026.">
-<meta name="keywords" content="sunset app, sunset gallery, photo app, sky photography">
+<title>Get the App — A+ Sunsets</title>
+<meta name="description" content="See what A+ Sunsets does before it launches: the gallery, the location tags, how it works, and how to get notified the moment it's live on August 10, 2026.">
+<meta name="keywords" content="sunset app, sunset gallery, photo app, sky photography, download">
 <meta name="author" content="Awesome Solutions & Software">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#1a0e2e">
@@ -13,13 +13,13 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
-<link rel="canonical" href="https://www.assunsets.com/product.html">
+<link rel="canonical" href="https://www.assunsets.com/download.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="A+ Sunsets">
-<meta property="og:title" content="Our Product — A+ Sunsets">
-<meta property="og:description" content="A+ Sunsets is a gallery app for people who stop and watch the sky. Launching August 1, 2026.">
-<meta property="og:url" content="https://www.assunsets.com/product.html">
+<meta property="og:title" content="Get the App — A+ Sunsets">
+<meta property="og:description" content="See what A+ Sunsets does before it launches: the gallery, the location tags, how it works, and how to get notified the moment it's live on August 10, 2026.">
+<meta property="og:url" content="https://www.assunsets.com/download.html">
 <meta property="og:locale" content="en_US">
 
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; base-uri 'self'; form-action 'self';">
@@ -38,7 +38,7 @@
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.assunsets.com/"},
-    {"@type": "ListItem", "position": 2, "name": "Our Product", "item": "https://www.assunsets.com/product.html"}
+    {"@type": "ListItem", "position": 2, "name": "Get the App", "item": "https://www.assunsets.com/download.html"}
   ]
 }
 </script>
@@ -60,9 +60,6 @@
     --ink:#120819;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  /* Painted on <html> as well as <body>: several in-app viewers (iOS Files,
-     Messages previews) don't inherit the body background, which left the
-     translucent nav and footer panels sitting on white. */
   html{scroll-behavior:smooth; background:var(--night);}
   body{
     background:var(--night);
@@ -73,9 +70,6 @@
     -webkit-text-size-adjust:100%;
     overflow-x:hidden;
   }
-  /* Sections paint their own background rather than relying on <body>: some
-     in-app viewers and previews don't inherit it, which left cream text
-     sitting on white and made the page unreadable. */
   main{background:var(--night);}
 
   .display{
@@ -115,22 +109,17 @@
     border-radius:4px;
   }
 
-  /* ---------- GRAIN OVERLAY (photographic texture, ties to "photo app") ---------- */
+  /* ---------- GRAIN OVERLAY ---------- */
   .grain{
     position:fixed; inset:0; z-index:5; pointer-events:none;
     opacity:0.05; mix-blend-mode:overlay;
-    /* One stitched 160px tile, repeated, instead of running feTurbulence
-       across the entire viewport. Same texture, a fraction of the paint
-       cost — the difference is visible on phones during scroll. */
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
     background-repeat:repeat;
     background-size:160px 160px;
   }
+  @media (max-width:760px){ .grain{display:none;} }
 
-
-  /* ---------- NAV ----------
-     Scoped to a class, not the bare `nav` element: the footer has its own
-     <nav> and must not inherit the fixed header treatment. */
+  /* ---------- NAV ---------- */
   .site-nav{
     position:fixed; top:0; left:0; right:0; z-index:50;
     display:flex; flex-direction:column; align-items:stretch;
@@ -147,12 +136,10 @@
   .brand{
     display:flex; align-items:center; gap:9px; flex:0 0 auto;
     -webkit-user-select:none; user-select:none;
-    -webkit-tap-highlight-color:transparent;  /* the wiggle is the only feedback */
+    -webkit-tap-highlight-color:transparent;
     color:inherit; text-decoration:none;
     cursor:pointer;
   }
-  /* A nudge, not a shake: ~1px of travel over a quarter second. Anything
-     bigger reads as an error state rather than a hello. */
   @keyframes brand-nudge{
     0%,100%{transform:translateX(0)    rotate(0deg);}
     22%    {transform:translateX(-1.2px) rotate(-0.5deg);}
@@ -162,9 +149,6 @@
   }
   .brand.is-nudging{animation:brand-nudge .26s ease-in-out;}
 
-  /* ---------- NAV LINKS ----------
-     Sit directly beside the mark, in the same mono voice as the other labels
-     on the page, so the pixel CTA stays the only loud thing in the bar. */
   .nav-links{
     display:flex; align-items:center; gap:0;
     list-style:none;
@@ -191,10 +175,6 @@
   .brand-name{font-family:'Fraunces',serif; font-weight:600; font-size:13px; letter-spacing:0.03em; white-space:nowrap;}
   .brand-name span{display:block; font-family:'Space Mono',monospace; font-weight:400; font-size:8px; letter-spacing:0.14em; color:var(--cream-dim); margin-top:1px;}
 
-
-  /* ---------- MINI LOGO BUTTON + MENU ----------
-     The mark again, at button size, on the opposite end of the bar from the
-     brand: the two arcs bracket the navigation. */
   .nav-menu-btn{
     flex:0 0 auto;
     display:flex; align-items:center; justify-content:center;
@@ -225,8 +205,6 @@
     transform-origin:top right;
   }
   .nav-menu[hidden]{display:none;}
-  /* A notch under the button, so the panel reads as belonging to it rather
-     than floating loose over the hero. */
   .nav-menu::before{
     content:"";
     position:absolute; top:-7px; right:12px;
@@ -240,8 +218,6 @@
     from{opacity:0; transform:translateY(-6px) scale(.98);}
     to{opacity:1; transform:none;}
   }
-  /* Identity block, the way an account menu opens with who you are. Here
-     there are no accounts yet, so it states what the site is instead. */
   .menu-head{
     display:flex; align-items:center; gap:10px;
     padding:13px 13px 12px;
@@ -264,7 +240,6 @@
     font-size:9px; letter-spacing:0.14em; text-transform:uppercase;
     color:var(--cream-dim); margin-top:2px;
   }
-  /* Groups, not a flat list: the action, the pages, then the ways to reach us. */
   .menu-group{display:flex; flex-direction:column; padding:5px;}
   .menu-group + .menu-group,
   .menu-head + .menu-group{border-top:1px solid var(--line);}
@@ -284,20 +259,13 @@
     stroke-linecap:round; stroke-linejoin:round;
     opacity:0.9;
   }
-  /* The signup is the only thing on this site anyone can actually do yet, so
-     it keeps the gold even here. */
   .nav-menu a.is-primary{color:var(--gold);}@media (hover:hover){ .nav-menu a.is-primary:hover{background:var(--gold); color:var(--ink);} }
   .nav-menu .ext{margin-left:auto; font-size:10px; line-height:1; opacity:0.55;}
-
 
   /* ---------- FOOTER ---------- */
   footer{
     padding:34px 6vw 50px;
     background:var(--ink);
-    /* The tallest block on the page, and it starts below the fold. Skipping
-       its layout and paint until it is scrolled to takes that work out of
-       first paint, which is the frame that matters when the page is being
-       hit hard. The reserved height keeps the scrollbar honest meanwhile. */
     content-visibility:auto;
     contain-intrinsic-size:auto 560px;
   }
@@ -334,11 +302,6 @@
   @media (max-width:760px){
     .footer-cols{grid-template-columns:1fr; gap:32px; padding:0;}
   }
-
-  /* ---------- FOOTER LINK GRID ----------
-     Sixteen links is a lot of surface, so they get quiet Inter at a readable
-     size rather than the pixel face, and auto-fill columns that reflow from
-     four across down to one without a single extra media query. */
   .footer-links-grid{
     display:grid;
     grid-template-columns:repeat(4, minmax(0, 1fr));
@@ -348,9 +311,6 @@
     padding:26px 22px 6px;
     border-top:1px solid var(--line);
   }
-  /* Plain text, not links. No hover colour, no underline, no pointer — a
-     cursor or a highlight on something that doesn't respond is worse than
-     no affordance at all, because it invites the click and then eats it. */
   .footer-links-grid span{
     justify-self:start;
     font-size:13px; line-height:1.45;
@@ -369,7 +329,6 @@
     text-transform:none; letter-spacing:0.03em;
     color:rgba(255,243,226,0.55);
   }
-
   .footer-links{display:flex; gap:10px; flex-wrap:wrap;}
   .footer-links a{
     font-family:'Press Start 2P', monospace;
@@ -396,10 +355,7 @@
   #main{scroll-margin-top:86px;}
   @media (max-width:760px){ #main{scroll-margin-top:74px;} }
 
-  /* ---------- BARE PAGE SHELL ----------
-     Header, an empty stage, footer. The stage is what stops the footer
-     riding up under the fixed nav on a tall screen, and it carries the
-     nav's height as top padding so nothing hides behind the bar. */
+  /* ---------- PAGE SHELL ---------- */
   body.page-bare{
     min-height:100vh;
     min-height:100svh;
@@ -407,15 +363,10 @@
   }
   .page-stage{
     flex:1 1 auto;
-    display:flex; flex-direction:column; justify-content:center;
-    padding:calc(86px + 6vh) 6vw calc(6vh + env(safe-area-inset-bottom));
+    padding:calc(86px + 6vh) 6vw calc(8vh + env(safe-area-inset-bottom));
     background:var(--night);
   }
-  /* 22px of inner padding, matching .footer-cols, so the title starts on the
-     same vertical line as the About column below it. Without it the head sat
-     22px left of everything in the footer, which on a wide screen reads as a
-     misprint rather than a margin. */
-  .page-head{max-width:1200px; margin:0 auto; width:100%; padding:0 22px;}
+  .page-head{max-width:900px; margin:0 auto; width:100%; padding:0 22px;}
   .page-eyebrow{
     display:inline-flex; align-items:center; gap:10px;
     font-family:'Space Mono',monospace;
@@ -433,23 +384,13 @@
     font-size:clamp(34px, 7vw, 60px); line-height:1.12;
     letter-spacing:-0.01em;
   }
-  /* A held state, not an error: the page exists, its content does not yet.
-     Space Mono at the eyebrow's size so it reads as machine status rather
-     than as copy, and a slow breath so it does not sit dead on the page. */
-  .page-status{
+  .page-kicker{
     font-family:'Space Mono',monospace;
     font-size:clamp(12px, 1.5vw, 14px);
-    letter-spacing:0.14em;
+    letter-spacing:0.1em;
     color:var(--cream-dim);
     margin-top:16px;
-    animation:status-breathe 2.6s ease-in-out infinite;
-  }
-  @keyframes status-breathe{
-    0%,100%{opacity:0.55;}
-    50%    {opacity:1;}
-  }
-  @media (prefers-reduced-motion:reduce){
-    .page-status{animation:none; opacity:0.85;}
+    max-width:56ch;
   }
   .page-rule{
     width:clamp(120px, 26vw, 240px); height:5px;
@@ -458,18 +399,142 @@
     border-radius:3px;
   }
   @media (max-width:760px){
-    .page-stage{padding:calc(74px + 5vh) 5vw calc(5vh + env(safe-area-inset-bottom));}
-    /* The footer drops its own 22px inset at this width; the head follows. */
+    .page-stage{padding:calc(74px + 5vh) 5vw calc(6vh + env(safe-area-inset-bottom));}
     .page-head{padding:0;}
   }
 
-  /* ---------- MOBILE PAINT BUDGET ----------
-     A fixed full-viewport blend layer costs work on every scrolled frame
-     rather than once. It is texture, not information, and phones are where
-     the traffic is and where the GPU budget is smallest, so it comes off
-     there and stays on desktop. The same rule the home page runs. */
-  @media (max-width:760px){
-    .grain{display:none;}
+  /* ---------- DOWNLOAD PAGE SECTIONS ---------- */
+  .dl-section{max-width:900px; margin:0 auto; padding:58px 22px 0;}
+  .dl-section:first-of-type{padding-top:44px;}
+  @media (max-width:760px){ .dl-section{padding:44px 0 0;} }
+  .dl-section h2{
+    font-size:clamp(24px, 3.6vw, 34px);
+    margin-bottom:12px;
+  }
+  .dl-section > p.lead{
+    color:var(--cream-dim); font-size:14.5px; font-weight:700; line-height:1.6;
+    max-width:56ch; margin-bottom:8px;
+  }
+
+  /* store badges, lifted from the homepage panel treatment */
+  .stores{
+    position:relative;
+    max-width:460px;
+    border:2px solid var(--cream);
+    box-shadow:4px 4px 0 #1a1006;
+    background:rgba(255,243,226,0.04);
+  }
+  .stores-body{
+    display:flex; flex-direction:column;
+    padding:clamp(14px, 4vw, 18px);
+    gap:clamp(11px, 3vw, 14px);
+  }
+  .store-badges{display:flex; gap:10px; align-items:stretch;}
+  .store-badge{
+    flex:1 1 0; min-width:0; max-width:168px;
+    display:block;
+    transition:transform .12s ease;
+  }@media (hover:hover){ .store-badge:hover{transform:translateY(-2px);} }
+  .store-badge svg{display:block; width:100%; height:auto;}
+  .stores-note{
+    font-family:'Space Mono',monospace;
+    font-size:8.5px; letter-spacing:0.06em;
+    color:rgba(255,243,226,0.62);
+  }
+
+  /* feature list, same construction as the homepage's "About" grid */
+  .feature-list{display:flex; flex-direction:column; gap:0;}
+  .feature{
+    display:flex; align-items:flex-start; gap:18px;
+    padding:22px 4px;
+    border-top:1px solid var(--line);
+  }
+  .feature:last-child{border-bottom:1px solid var(--line);}
+  .feature .icon{
+    width:38px; height:38px; flex-shrink:0;
+    border:1px solid var(--line-strong);
+    border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:17px;
+    background:linear-gradient(135deg, rgba(255,182,39,0.12), rgba(255,90,95,0.12));
+  }
+  .feature h3{font-family:'Fraunces',serif; font-weight:600; font-size:16px; margin-bottom:4px;}
+  .feature p{font-size:13.5px; color:var(--cream-dim); max-width:48ch;}
+
+  /* how it works: three pixel-bordered steps */
+  .steps{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;
+  }
+  @media (max-width:700px){ .steps{grid-template-columns:1fr;} }
+  .step{
+    border:2px solid var(--line-strong);
+    border-radius:10px;
+    padding:20px;
+    background:rgba(255,243,226,0.03);
+  }
+  .step-num{
+    display:inline-block;
+    font-family:'Press Start 2P',monospace;
+    font-size:10px;
+    color:var(--ink);
+    background:var(--gold);
+    padding:5px 8px;
+    border-radius:6px;
+    margin-bottom:14px;
+  }
+  .step h3{font-family:'Fraunces',serif; font-weight:600; font-size:16px; margin-bottom:6px;}
+  .step p{font-size:13.5px; color:var(--cream-dim);}
+
+  /* faq */
+  .faq-item{padding:18px 0; border-top:1px solid var(--line);}
+  .faq-item:last-child{border-bottom:1px solid var(--line);}
+  .faq-item h3{font-family:'Fraunces',serif; font-weight:600; font-style:italic; font-size:15.5px; margin-bottom:6px;}
+  .faq-item p{font-size:13.5px; color:var(--cream-dim); max-width:60ch;}
+
+  /* closing CTA */
+  .dl-cta{
+    text-align:center;
+    padding:56px 22px 8px;
+    max-width:900px; margin:0 auto;
+  }
+  .dl-cta p{color:var(--cream-dim); font-size:13.5px; margin-bottom:18px;}
+  .btn-primary{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--gold); color:var(--ink);
+    font-family:'Space Mono',monospace;
+    font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    padding:14px 26px;
+    border:2px solid var(--ink);
+    box-shadow:4px 4px 0 #1a1006;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }@media (hover:hover){ .btn-primary:hover{transform:translate(-2px,-2px); box-shadow:6px 6px 0 #1a1006;} }
+  .btn-primary:active{transform:translate(0,0); box-shadow:2px 2px 0 #1a1006;}
+
+  .shine-word{
+    font-weight:700;
+    color:var(--gold);
+    text-shadow:0 0 10px rgba(255,182,39,0.45), 0 0 22px rgba(255,182,39,0.20);
+  }
+  @supports ((-webkit-background-clip:text) or (background-clip:text)){
+    .shine-word{
+      display:inline-block;
+      background-image:linear-gradient(100deg,
+        var(--gold) 0%, var(--gold) 38%,
+        #fff6d8 50%,
+        var(--gold) 62%, var(--gold) 100%);
+      background-size:280% 100%;
+      background-position:180% 0;
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-shadow:none;
+      filter:drop-shadow(0 0 6px rgba(255,182,39,0.5));
+      animation:word-shine 3.8s ease-in-out infinite;
+    }
+  }
+  @keyframes word-shine{
+    0%, 72%{background-position:180% 0;}
+    100%   {background-position:-40% 0;}
   }
 
   @media (max-width:760px){
@@ -501,7 +566,6 @@
 
 <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- Reusable arc mark, so the logo is defined once and ridden everywhere -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <g id="arc-mark">
@@ -529,9 +593,9 @@
     </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="product.html" aria-current="page">Our Product</a></li>
+      <li><a href="product.html">Our Product</a></li>
       <li><a href="profile.html">Profile</a></li>
-      <li><a href="download.html">Get the App</a></li>
+      <li><a href="download.html" aria-current="page">Get the App</a></li>
     </ul>
     <button type="button" class="nav-menu-btn" id="menu-btn"
             aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
@@ -557,9 +621,9 @@
 
       <div class="menu-group">
         <a href="index.html"><svg class="mi" viewBox="0 0 20 20" aria-hidden="true"><use href="#i-home"/></svg>Home</a>
-        <a href="product.html" aria-current="page"><svg class="mi" viewBox="0 0 20 20" aria-hidden="true"><use href="#i-layers"/></svg>Our Product</a>
+        <a href="product.html"><svg class="mi" viewBox="0 0 20 20" aria-hidden="true"><use href="#i-layers"/></svg>Our Product</a>
         <a href="profile.html"><svg class="mi" viewBox="0 0 20 20" aria-hidden="true"><use href="#i-person"/></svg>Profile</a>
-        <a href="download.html"><svg class="mi" viewBox="0 0 20 20" aria-hidden="true"><use href="#i-download"/></svg>Get the App</a>
+        <a href="download.html" aria-current="page"><svg class="mi" viewBox="0 0 20 20" aria-hidden="true"><use href="#i-download"/></svg>Get the App</a>
       </div>
 
       <div class="menu-group">
@@ -567,21 +631,140 @@
           <svg class="mi" viewBox="0 0 20 20" aria-hidden="true"><use href="#i-instagram"/></svg>Instagram
           <span class="ext" aria-hidden="true">↗</span><span class="sr-only">(opens in a new tab)</span>
         </a>
-        <a href="mailto:hello@asunsets.com?subject=A%2B%20Sunsets">
+        <a href="mailto:awesomesunsets22@gmail.com?subject=A%2B%20Sunsets">
           <svg class="mi" viewBox="0 0 20 20" aria-hidden="true"><use href="#i-mail"/></svg>Contact
         </a>
       </div>
     </div>
   </div>
-
 </nav>
 
 <main id="main" class="page-stage">
   <div class="page-head">
-    <p class="page-eyebrow">A+ Sunsets · Our Product</p>
-    <h1 class="page-title">Our Product.</h1>
-    <p class="page-status">still loading&hellip;</p>
+    <p class="page-eyebrow">A+ Sunsets · Get the App</p>
+    <h1 class="page-title">Get the app.</h1>
+    <p class="page-kicker">Not live yet &mdash; A+ Sunsets launches <strong>August 10, 2026</strong>. Here's exactly what you're getting, so the two minutes it takes to sign up feel worth it.</p>
     <div class="page-rule" aria-hidden="true"></div>
+  </div>
+
+  <section class="dl-section" aria-labelledby="dl-stores-h">
+    <h2 id="dl-stores-h" class="display">Where it'll live.</h2>
+    <p class="lead">iOS and Android, from day one. The badges below aren't wired up to the real stores yet &mdash; tap either one and we'll take you to the signup instead, so you're first in line when they go live.</p>
+    <div class="stores">
+      <div class="stores-body">
+        <div class="store-badges">
+          <a class="store-badge" href="index.html#signup" aria-label="Download on the App Store, available August 10">
+            <svg viewBox="0 0 135 40" role="img" aria-hidden="true">
+              <rect width="135" height="40" rx="6" fill="#000"/>
+              <rect x="0.5" y="0.5" width="134" height="39" rx="5.5" fill="none" stroke="#a6a6a6"/>
+              <g transform="translate(16 8) scale(0.94)" fill="#fff"><path d="M11.9 6.3c.6-.75 1.02-1.77.9-2.8-.88.04-1.95.59-2.58 1.33-.56.65-1.06 1.7-.93 2.7.99.08 1.99-.5 2.61-1.23z M12.79 7.72c-1.44-.09-2.66.82-3.35.82-.69 0-1.74-.78-2.86-.76-1.47.02-2.83.86-3.59 2.18-1.53 2.66-.39 6.6 1.1 8.76.73 1.06 1.6 2.25 2.74 2.211.1-.04 1.51-.71 2.84-.71 1.32 0 1.7.71 2.86.69 1.18-.02 1.93-1.08 2.65-2.14.84-1.23 1.18-2.42 1.2-2.48-.03-.01-2.3-.88-2.32-3.5-.02-2.19 1.79-3.24 1.87-3.29-1.02-1.51-2.61-1.68-3.17-1.72z"/></g>
+              <text x="42" y="16" fill="#fff" font-family="Helvetica,Arial,sans-serif" font-size="8">Download on the</text>
+              <text x="42" y="30" fill="#fff" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="500">App Store</text>
+            </svg>
+          </a>
+          <a class="store-badge" href="index.html#signup" aria-label="Get it on Google Play, available August 10">
+            <svg viewBox="0 0 135 40" role="img" aria-hidden="true">
+              <rect width="135" height="40" rx="6" fill="#000"/>
+              <rect x="0.5" y="0.5" width="134" height="39" rx="5.5" fill="none" stroke="#a6a6a6"/>
+              <g transform="translate(13 10)">
+                <path fill="#00a0ff" d="M1 1.3C.8 1.5.7 1.9.7 2.4v15.2c0 .5.1.9.3 1.1l.1.1 8.5-8.5v-.2z"/>
+                <path fill="#ffbc00" d="M12.4 12.9 9.6 10.1v-.2l2.8-2.8 3.5 2c1 .5 1 1.4 0 2z"/>
+                <path fill="#ff3a44" d="M12.5 12.8 9.6 10 1 18.6c.3.4.9.4 1.5.1z"/>
+                <path fill="#00c853" d="M12.5 7.2 2.5 1.3C1.9 1 1.3 1 1 1.4L9.6 10z"/>
+              </g>
+              <text x="42" y="16" fill="#fff" font-family="Helvetica,Arial,sans-serif" font-size="8" letter-spacing="0.6">GET IT ON</text>
+              <text x="42" y="30" fill="#fff" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="500">Google Play</text>
+            </svg>
+          </a>
+        </div>
+        <p class="stores-note">not live yet, the badges will link to the real stores on launch day, August 10, 2026.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="dl-section" aria-labelledby="dl-features-h">
+    <h2 id="dl-features-h" class="display">What's actually in it.</h2>
+    <p class="lead">One app, built for one thing: the sky you stopped for. No feed of everything else.</p>
+    <div class="feature-list">
+      <div class="feature">
+        <div class="icon" aria-hidden="true">🌇</div>
+        <div>
+          <h3>Personal sky gallery</h3>
+          <p>Every sunset you save is organized automatically by place and date, sitting in <span class="shine-word">YOUR</span> profile, not a shared public feed.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="icon" aria-hidden="true">📍</div>
+        <div>
+          <h3>Location tagged</h3>
+          <p>Every photo remembers where you were standing, so you can see where <span class="shine-word">YOUR</span> best skies happened and go back.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="icon" aria-hidden="true">✨</div>
+        <div>
+          <h3>Built for one thing</h3>
+          <p>Scroll a feed that's nothing but <span class="shine-word">YOUR</span> sunsets &mdash; no ads, no strangers, no algorithm deciding what you see.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="icon" aria-hidden="true">🔔</div>
+        <div>
+          <h3>Launch-day notification</h3>
+          <p>Leave your email once and we send exactly one message, the day it goes live. Nothing before, nothing after.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dl-section" aria-labelledby="dl-steps-h">
+    <h2 id="dl-steps-h" class="display">How it'll work.</h2>
+    <p class="lead">Three steps, start to finish.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <h3>Catch the sky</h3>
+        <p>Open the app when a sunset stops you, snap it, and save it straight into your gallery.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <h3>It tags itself</h3>
+        <p>Place and date are added automatically, so every sky lands sorted without any extra work.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <h3>Watch it grow</h3>
+        <p>Scroll back through your own collection any time &mdash; brighter and longer than the eleven minutes it actually lasted.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="dl-section" aria-labelledby="dl-faq-h">
+    <h2 id="dl-faq-h" class="display">Questions, answered.</h2>
+    <div class="faq-item">
+      <h3>When does it launch?</h3>
+      <p>August 10, 2026, on both iOS and Android. The date moved from August 1 while we finished acquiring some software licences the app depends on.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Is it free?</h3>
+      <p>Yes. There's nothing to buy here &mdash; this page and the rest of the site collect nothing beyond the email you choose to leave for the launch notice.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Do I need an account to use it?</h3>
+      <p>Accounts open at launch, alongside the app. Nothing to set up before then.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What happens with my email?</h3>
+      <p>It's held by our form processor, Formspree, and used once &mdash; to send the launch notice on August 10. Write to <a class="shine-word" href="mailto:awesomesunsets22@gmail.com?subject=A%2B%20Sunsets">awesomesunsets22@gmail.com</a> any time to see or delete it.</p>
+    </div>
+  </section>
+
+  <div class="dl-cta">
+    <p>Want to be first through the door on launch day?</p>
+    <a class="btn-primary" href="index.html#signup">
+      <svg class="mi" viewBox="0 0 20 20" aria-hidden="true" style="width:15px;height:15px;"><use href="#i-bell"/></svg>
+      Notify me
+    </a>
   </div>
 </main>
 
@@ -594,12 +777,10 @@
 
     <section class="footer-col" aria-labelledby="f-story">
       <h3 id="f-story">Our story</h3>
-      <p>It started in 2022 with a shared album between friends who kept texting each other photos of the same sunset from different streets. The album got too big, so we built something better. Four years later it's an app, launching August 1, 2026.</p>
+      <p>It started in 2022 with a shared album between friends who kept texting each other photos of the same sunset from different streets. The album got too big, so we built something better. Four years later it's an app, launching August 10, 2026.</p>
     </section>
   </div>
 
-  <!-- Informational only: these are labels, not destinations. Kept as a
-       plain list rather than a <nav>, since there is nothing to navigate to. -->
   <div class="footer-links-grid">
     <span>Terms &amp; Conditions</span>
     <span>Privacy Policy</span>
@@ -626,15 +807,12 @@
     </div>
     <div class="footer-links">
       <a href="https://www.instagram.com/2as_inc/" target="_blank" rel="noopener noreferrer">Instagram</a>
-      <a href="mailto:hello@asunsets.com?subject=A%2B%20Sunsets">Contact</a>
+      <a href="mailto:awesomesunsets22@gmail.com?subject=A%2B%20Sunsets">Contact</a>
     </div>
   </div>
 </footer>
 
 <script>
-  // Mini-logo menu, brand nudge, and the new-tab fallback: the same three
-  // behaviours the home page runs, kept identical so the bar feels the same
-  // whichever page you are on.
   (function(){
     var menuBtn   = document.getElementById('menu-btn');
     var menuPanel = document.getElementById('nav-menu');
@@ -652,12 +830,6 @@
       if (opening) menuPanel.querySelector('a').focus();
     });
 
-    // Tabbing past the last item closes it, like any well-behaved dropdown.
-    // The rule is for keyboard focus only, so a press inside the bar suspends
-    // it: Safari and iOS do not move focus to a <button> or a link when it is
-    // tapped, so focusout fired on mousedown and hid the panel before the click
-    // landed. The button reopened what the reader was trying to close, and
-    // Instagram and Contact inside the panel never opened at all.
     var pressInNav = false;
     menuBtn.parentNode.addEventListener('pointerdown', function(){ pressInNav = true; });
     document.addEventListener('pointerup',     function(){ pressInNav = false; });
@@ -694,8 +866,6 @@
       });
     }
 
-    // In-app browsers frequently swallow target="_blank" and simply do
-    // nothing. Try the new tab; if it was blocked, navigate in place.
     document.addEventListener('click', function(e){
       if (e.defaultPrevented || e.button !== 0) return;
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
