@@ -8,8 +8,8 @@
 <meta name="keywords" content="sunset app, sunset gallery, photo app, sky photography, download">
 <meta name="author" content="Awesome Solutions & Software">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#ffffff">
-<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#1a0e2e">
+<meta name="color-scheme" content="dark">
 <meta name="format-detection" content="telephone=no">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
@@ -77,20 +77,18 @@
 
 <style>
   :root{
-    color-scheme:light;
-    /* ---- palette: the same sunset accents as the rest of the site, on a
-       white ground instead of the night sky the other pages use ---- */
-    --night:#ffffff;       /* page background */
+    color-scheme:dark;
+    /* ---- palette: a real sunset arc, matching the rest of the site ---- */
+    --night:#160a26;       /* page background, top of sky just past dusk */
     --plum:#5c1e52;
     --magenta:#b23a63;
     --ember:#f0602e;
-    --gold:#ffb627;        /* sun core, used as a fill on buttons/badges */
-    --gold-ink:#a15e00;    /* same accent, darkened for use as text on white */
+    --gold:#ffb627;        /* sun core, used as a fill on buttons/badges/accents, never as text */
     --hot:#ff5a5f;         /* accent / CTA */
-    --cream:#211527;       /* main text, dark plum-black on white */
-    --cream-dim:rgba(33,21,39,0.72);
-    --line:rgba(33,21,39,0.10);
-    --line-strong:rgba(33,21,39,0.22);
+    --cream:#fff3e2;       /* all running text: white on dark, black (--ink) on light fills */
+    --cream-dim:rgba(255,243,226,0.82);
+    --line:rgba(255,243,226,0.14);
+    --line-strong:rgba(255,243,226,0.30);
     --ink:#120819;         /* text sitting on top of gold/instagram fills */
     /* ---- borrowed from Instagram's mark, used only for the "follow us"
        moments so it reads as a deliberate nod, not a re-theme ---- */
@@ -100,8 +98,8 @@
     --ig-4:#962fbf;
     --ig-5:#4f5bd5;
     --ig-gradient:linear-gradient(45deg, var(--ig-1), var(--ig-2), var(--ig-3), var(--ig-4), var(--ig-5));
-    --card-bg:#faf7f4;
-    --card-border:rgba(33,21,39,0.08);
+    --card-bg:rgba(255,255,255,0.045);
+    --card-border:rgba(255,255,255,0.09);
     --card-radius:20px;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -170,7 +168,7 @@
     display:flex; flex-direction:column; align-items:stretch;
     padding:16px 6vw 12px;
     border-bottom:1px solid var(--line);
-    background:rgba(255,255,255,0.86);
+    background:rgba(22,10,38,0.86);
     backdrop-filter:blur(10px);
     -webkit-backdrop-filter:blur(10px);
   }
@@ -214,7 +212,7 @@
     border-bottom:2px solid transparent;
     transition:color .15s ease, border-color .15s ease;
   }@media (hover:hover){ .nav-links a:hover{color:var(--cream); border-bottom-color:var(--gold);} }
-  .nav-links a[aria-current="page"]{color:var(--gold-ink); border-bottom-color:var(--gold);}
+  .nav-links a[aria-current="page"]{color:var(--cream); border-bottom-color:var(--gold);}
   .arc-mark{width:26px; height:15px; position:relative; flex:0 0 auto;}
   .arc-mark svg{width:100%; height:100%;}
   .brand-name{font-family:'Fraunces',serif; font-weight:600; font-size:13px; letter-spacing:0.03em; white-space:nowrap;}
@@ -225,12 +223,12 @@
     display:flex; align-items:center; justify-content:center;
     width:38px; height:34px;
     padding:0;
-    background:rgba(33,21,39,0.05);
+    background:rgba(255,243,226,0.06);
     border:2px solid var(--line-strong);
     cursor:pointer;
     transition:background .15s ease, border-color .15s ease, transform .12s ease;
   }
-  .nav-menu-btn svg{width:22px; height:13px; display:block;}@media (hover:hover){ .nav-menu-btn:hover{background:rgba(33,21,39,0.08); border-color:var(--cream);} }
+  .nav-menu-btn svg{width:22px; height:13px; display:block;}@media (hover:hover){ .nav-menu-btn:hover{background:rgba(255,243,226,0.12); border-color:var(--cream);} }
   .nav-menu-btn[aria-expanded="true"]{
     background:var(--gold); border-color:var(--cream);
     box-shadow:3px 3px 0 #1a1006;
@@ -243,7 +241,7 @@
     width:236px;
     max-height:calc(100vh - 96px); overflow-y:auto;
     padding:0;
-    background:#ffffff;
+    background:#1d0c30;
     border:2px solid var(--cream);
     box-shadow:5px 5px 0 #1a1006;
     animation:menu-drop .16s ease-out;
@@ -254,7 +252,7 @@
     content:"";
     position:absolute; top:-7px; right:12px;
     width:10px; height:10px;
-    background:#ffffff;
+    background:#1d0c30;
     border-top:2px solid var(--cream);
     border-left:2px solid var(--cream);
     transform:rotate(45deg);
@@ -271,7 +269,7 @@
     flex:0 0 auto;
     display:flex; align-items:center; justify-content:center;
     width:32px; height:32px;
-    background:rgba(33,21,39,0.05);
+    background:rgba(255,243,226,0.07);
     border:1px solid var(--line-strong);
   }
   .menu-avatar svg{width:20px; height:12px; display:block;}
@@ -295,16 +293,16 @@
     color:var(--cream-dim);
     padding:12px 9px;
     transition:background .13s ease, color .13s ease;
-  }@media (hover:hover){ .nav-menu a:hover{background:rgba(33,21,39,0.05); color:var(--cream);} }
+  }@media (hover:hover){ .nav-menu a:hover{background:rgba(255,243,226,0.08); color:var(--cream);} }
   .nav-menu a[aria-current="page"]{color:var(--cream);}
-  .nav-menu a[aria-current="page"] .mi{color:var(--gold-ink);}
+  .nav-menu a[aria-current="page"] .mi{color:var(--cream);}
   .mi{
     flex:0 0 auto; width:17px; height:17px;
     fill:none; stroke:currentColor; stroke-width:1.5;
     stroke-linecap:round; stroke-linejoin:round;
     opacity:0.9;
   }
-  .nav-menu a.is-primary{color:var(--gold-ink);}@media (hover:hover){ .nav-menu a.is-primary:hover{background:var(--gold); color:var(--ink);} }
+  .nav-menu a.is-primary{color:var(--cream);}@media (hover:hover){ .nav-menu a.is-primary:hover{background:var(--gold); color:var(--ink);} }
   .nav-menu .ext{margin-left:auto; font-size:10px; line-height:1; opacity:0.55;}
 
 
@@ -343,7 +341,7 @@
   /* ---------- FOOTER ---------- */
   footer{
     padding:34px 6vw 50px;
-    background:var(--night);
+    background:var(--ink);
     content-visibility:auto;
     contain-intrinsic-size:auto 560px;
   }
@@ -357,7 +355,7 @@
     padding:18px 22px;
     max-width:1200px; margin:0 auto;
     background:#241505;
-    border:2px solid #fff3e2;
+    border:2px solid var(--cream);
     box-shadow:4px 4px 0 #1a1006;
     clip-path:polygon(
       0 6px, 6px 6px, 6px 0,
@@ -373,7 +371,7 @@
   }
   .footer-col h3{
     font-family:'Fraunces',serif; font-weight:600; font-style:italic;
-    font-size:19px; color:var(--gold-ink);
+    font-size:19px; color:var(--cream);
     margin-bottom:12px;
   }
   .footer-col p{
@@ -416,9 +414,9 @@
     font-family:'Press Start 2P', monospace;
     font-size:9px;
     letter-spacing:0.02em;
-    color:#fff3e2;
+    color:var(--cream);
     padding:7px 12px;
-    border:2px solid #fff3e2;
+    border:2px solid var(--cream);
     background:rgba(255,243,226,0.06);
     transition:background .15s ease, color .15s ease, transform .12s ease, box-shadow .12s ease;
   }@media (hover:hover){ .footer-links a:hover{
@@ -453,7 +451,7 @@
     display:inline-flex; align-items:center; gap:10px;
     font-family:'Space Mono',monospace;
     font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
-    color:var(--gold-ink);
+    color:var(--cream);
     margin-bottom:18px;
   }
   .page-eyebrow::before{
@@ -541,7 +539,7 @@
     border-radius:var(--card-radius);
     background:var(--card-bg);
     border:1px solid var(--card-border);
-    box-shadow:0 10px 26px rgba(33,21,39,0.08);
+    box-shadow:0 14px 34px rgba(0,0,0,0.34);
   }
 
   /* ---------- FOLLOW CARD ----------
@@ -592,7 +590,7 @@
   .stores-note{
     font-family:'Space Mono',monospace;
     font-size:8.5px; letter-spacing:0.06em;
-    color:rgba(33,21,39,0.58);
+    color:rgba(255,243,226,0.62);
   }
 
   /* feature grid: two-up cards rather than a stacked list of rows, closer
@@ -605,7 +603,7 @@
     padding:22px;
     display:flex; flex-direction:column; gap:12px;
     transition:transform .16s ease, border-color .16s ease;
-  }@media (hover:hover){ .feature-card:hover{transform:translateY(-3px); border-color:rgba(33,21,39,0.18);} }
+  }@media (hover:hover){ .feature-card:hover{transform:translateY(-3px); border-color:rgba(255,255,255,0.18);} }
   .feature-card .icon{
     width:42px; height:42px; flex-shrink:0;
     border-radius:12px;
@@ -652,24 +650,8 @@
 
   .shine-word{
     font-weight:700;
-    color:var(--gold-ink);
+    color:var(--cream);
     text-shadow:none;
-  }
-  @supports ((-webkit-background-clip:text) or (background-clip:text)){
-    .shine-word{
-      display:inline-block;
-      background-image:linear-gradient(100deg,
-        var(--gold-ink) 0%, var(--gold-ink) 38%,
-        var(--gold) 50%,
-        var(--gold-ink) 62%, var(--gold-ink) 100%);
-      background-size:280% 100%;
-      background-position:180% 0;
-      -webkit-background-clip:text;
-      background-clip:text;
-      -webkit-text-fill-color:transparent;
-      text-shadow:none;
-      animation:word-shine 3.8s ease-in-out infinite;
-    }
   }
   @keyframes word-shine{
     0%, 72%{background-position:180% 0;}

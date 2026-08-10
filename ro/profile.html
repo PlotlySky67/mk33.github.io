@@ -522,6 +522,34 @@
     background:linear-gradient(90deg, var(--gold), var(--hot));
     border-radius:3px;
   }
+
+  /* ---------- ACTION ROW ----------
+     Nothing on this page is built yet, but the reader shouldn't hit a dead
+     end while it isn't: the same rounded, action-oriented buttons used on
+     the download page, so every page on the site ends in something to tap. */
+  .cta-row{display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:26px;}
+  .btn-primary, .btn-instagram{
+    display:inline-flex; align-items:center; gap:9px;
+    font-family:'Inter',sans-serif;
+    font-size:14.5px; font-weight:700;
+    padding:13px 24px;
+    border-radius:999px;
+    border:none;
+    cursor:pointer;
+    transition:transform .16s ease, box-shadow .16s ease, filter .16s ease;
+  }
+  .btn-primary{
+    background:var(--gold); color:var(--ink);
+    box-shadow:0 6px 18px rgba(255,182,39,0.28);
+  }@media (hover:hover){ .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(255,182,39,0.38);} }
+  .btn-primary:active{transform:translateY(0);}
+  .btn-instagram{
+    background:linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+    color:#fff;
+    box-shadow:0 8px 22px rgba(214,41,118,0.38);
+  }@media (hover:hover){ .btn-instagram:hover{transform:translateY(-2px); box-shadow:0 12px 28px rgba(214,41,118,0.48);} }
+  .btn-instagram:active{transform:translateY(0);}
+  .btn-instagram .mi{width:16px; height:16px;}
   @media (max-width:760px){
     .page-stage{padding:calc(74px + 5vh) 5vw calc(5vh + env(safe-area-inset-bottom));}
     /* The footer drops its own 22px inset at this width; the head follows. */
@@ -652,6 +680,16 @@
     <h1 class="page-title">Profil.</h1>
     <p class="page-status">se încarcă încă&hellip;</p>
     <div class="page-rule" aria-hidden="true"></div>
+    <div class="cta-row">
+      <a class="btn-primary" href="index.html#signup">
+        <svg class="mi" viewBox="0 0 20 20" aria-hidden="true" style="width:15px;height:15px;"><use href="#i-bell"/></svg>
+        Anunță-mă
+      </a>
+      <a class="btn-instagram" href="https://www.instagram.com/2as_inc/" target="_blank" rel="noopener noreferrer">
+        <svg class="mi" viewBox="0 0 20 20" aria-hidden="true"><use href="#i-instagram"/></svg>
+        Urmărește @2as_inc
+      </a>
+    </div>
   </div>
 </main>
 
