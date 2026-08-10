@@ -2260,7 +2260,20 @@
       openModal(email);
       form.reset();
     } catch (err) {
-      note.textContent = "Ceva nu a mers bine din partea noastră. Te rugăm să încerci din nou peste puțin timp.";
+      // The free tier behind this form has a hard monthly cap, so a burst of
+      // interest can exhaust it well before the month is out. Rather than a
+      // dead-end error, hand the reader a one-tap way to still get on the
+      // list — their own mail client, which has no such quota. Built with
+      // DOM calls rather than innerHTML since `email` is user input and this
+      // runs on every failure, not just validated-and-caught ones.
+      note.textContent = "";
+      note.appendChild(document.createTextNode("Nu a mers, probabil e trafic mare la noi acum. "));
+      var fallbackLink = document.createElement('a');
+      fallbackLink.href = "mailto:awesomesunsets22@gmail.com?subject=" + encodeURIComponent("Înscriere A+ Sunsets") + "&body=" + encodeURIComponent("Te rog adaugă-mă pe listă: " + email);
+      fallbackLink.className = "shine-word";
+      fallbackLink.textContent = "Apasă aici ca să ne scrii direct";
+      note.appendChild(fallbackLink);
+      note.appendChild(document.createTextNode(" și te adăugăm noi manual."));
     } finally {
       btn.disabled = false;
       btn.textContent = "Anunță-mă";

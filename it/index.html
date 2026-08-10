@@ -2260,7 +2260,20 @@
       openModal(email);
       form.reset();
     } catch (err) {
-      note.textContent = "Qualcosa è andato storto da parte nostra. Riprova tra un momento.";
+      // The free tier behind this form has a hard monthly cap, so a burst of
+      // interest can exhaust it well before the month is out. Rather than a
+      // dead-end error, hand the reader a one-tap way to still get on the
+      // list — their own mail client, which has no such quota. Built with
+      // DOM calls rather than innerHTML since `email` is user input and this
+      // runs on every failure, not just validated-and-caught ones.
+      note.textContent = "";
+      note.appendChild(document.createTextNode("Non è andato a buon fine, probabilmente per traffico intenso da parte nostra. "));
+      var fallbackLink = document.createElement('a');
+      fallbackLink.href = "mailto:awesomesunsets22@gmail.com?subject=" + encodeURIComponent("Iscrizione A+ Sunsets") + "&body=" + encodeURIComponent("Per favore aggiungimi alla lista: " + email);
+      fallbackLink.className = "shine-word";
+      fallbackLink.textContent = "Tocca qui per scriverci direttamente";
+      note.appendChild(fallbackLink);
+      note.appendChild(document.createTextNode(" e ti aggiungiamo noi a mano."));
     } finally {
       btn.disabled = false;
       btn.textContent = "Avvisami";

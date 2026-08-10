@@ -2260,7 +2260,20 @@
       openModal(email);
       form.reset();
     } catch (err) {
-      note.textContent = "Something went wrong on our end. Please try again in a moment.";
+      // The free tier behind this form has a hard monthly cap, so a burst of
+      // interest can exhaust it well before the month is out. Rather than a
+      // dead-end error, hand the reader a one-tap way to still get on the
+      // list — their own mail client, which has no such quota. Built with
+      // DOM calls rather than innerHTML since `email` is user input and this
+      // runs on every failure, not just validated-and-caught ones.
+      note.textContent = "";
+      note.appendChild(document.createTextNode("That didn't go through, probably heavy traffic on our end. "));
+      var fallbackLink = document.createElement('a');
+      fallbackLink.href = "mailto:awesomesunsets22@gmail.com?subject=" + encodeURIComponent("A+ Sunsets signup") + "&body=" + encodeURIComponent("Please add me to the list: " + email);
+      fallbackLink.className = "shine-word";
+      fallbackLink.textContent = "Tap here to email us directly";
+      note.appendChild(fallbackLink);
+      note.appendChild(document.createTextNode(" and we'll add you by hand."));
     } finally {
       btn.disabled = false;
       btn.textContent = "Notify me";
