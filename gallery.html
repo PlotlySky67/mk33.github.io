@@ -472,9 +472,10 @@
   .photo-track::-webkit-scrollbar-thumb{background:var(--line-strong); border-radius:8px;}
   .photo-card{
     position:relative;
+    display:block;
     flex:0 0 auto;
-    width:min(64vw, 230px);
-    aspect-ratio:3/4;
+    width:min(70vw, 250px);
+    aspect-ratio:4/5;
     scroll-snap-align:center;
     border-radius:20px;
     overflow:hidden;
@@ -485,35 +486,12 @@
   .photo-card:nth-child(1){--tilt:-3deg;}
   .photo-card:nth-child(2){--tilt:2deg;}
   .photo-card:nth-child(3){--tilt:-1.5deg;}
-  .photo-card:nth-child(4){--tilt:2.5deg;}
-  .photo-card:nth-child(5){--tilt:-2deg;}
   @media (hover:hover){
     .photo-card:hover{ transform:rotate(0deg) translateY(-6px); box-shadow:0 20px 42px rgba(24,24,27,0.22); z-index:2; }
   }
-  .photo-card-fill{
-    position:absolute; inset:0;
-    /* Placeholder art until real uploads replace it — see photo-card
-       markup below for how a real photo drops in without touching layout. */
-    display:flex; align-items:flex-end; justify-content:flex-start;
-  }
-  .photo-card-flag{
-    position:absolute; top:12px; left:12px;
-    font-size:24px;
-    filter:drop-shadow(0 2px 5px rgba(0,0,0,0.3));
-  }
-  .photo-card-caption{
-    position:absolute; left:0; right:0; bottom:0;
-    padding:16px 14px 13px;
-    background:linear-gradient(0deg, rgba(0,0,0,0.55) 10%, transparent 100%);
-  }
-  .photo-card-caption strong{
-    display:block; color:#fff;
-    font-family:'Fraunces',serif; font-style:italic; font-weight:600; font-size:16px;
-  }
-  .photo-card-caption span{
-    display:block; margin-top:2px;
-    color:rgba(255,255,255,0.85);
-    font-family:'Space Mono',monospace; font-size:9px; letter-spacing:0.08em; text-transform:uppercase;
+  .photo-card img{
+    display:block; width:100%; height:100%;
+    object-fit:cover;
   }
   .photo-rail{
     max-width:1200px; height:2px; margin:0 auto; padding:0 6vw;
@@ -782,61 +760,24 @@
   <div class="page-head">
     <p class="page-eyebrow">A+ Sunsets · Gallery</p>
     <h1 class="page-title">Every sky, somewhere.</h1>
-    <p class="page-status">A rolling strip of sunsets from the community, five countries at a time. Pick one below and we'll pull it up in an instant.</p>
+    <p class="page-status">A few posts from @2as_inc to start. Below that, pick a country and we'll pull up a sunset from it in an instant.</p>
     <div class="page-rule" aria-hidden="true"></div>
   </div>
 
   <div class="photo-coaster">
     <div class="photo-track" id="photo-track" role="list" aria-label="Sunset photo carousel">
-      <!-- Five cards, one per placeholder sunset. Swap .photo-card-fill's
-           background for a real photo (background-image / <img>) once real
-           uploads replace the placeholder art — everything else, including
-           the country lookup below, is already wired to real data. -->
-      <div class="photo-card" role="listitem">
-        <div class="photo-card-fill" style="background:linear-gradient(160deg,#FFD166 0%,#FF5E36 100%);">
-          <span class="photo-card-flag" aria-hidden="true">🇬🇷</span>
-          <div class="photo-card-caption">
-            <strong>Santorini</strong>
-            <span>Greece</span>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" role="listitem">
-        <div class="photo-card-fill" style="background:linear-gradient(160deg,#FF8A5B 0%,#FF5E36 100%);">
-          <span class="photo-card-flag" aria-hidden="true">🇲🇻</span>
-          <div class="photo-card-caption">
-            <strong>North Malé Atoll</strong>
-            <span>Maldives</span>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" role="listitem">
-        <div class="photo-card-fill" style="background:linear-gradient(160deg,#FFD166 0%,#FF8A5B 100%);">
-          <span class="photo-card-flag" aria-hidden="true">🇯🇵</span>
-          <div class="photo-card-caption">
-            <strong>Mount Fuji</strong>
-            <span>Japan</span>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" role="listitem">
-        <div class="photo-card-fill" style="background:linear-gradient(160deg,#FF5E36 0%,#18181B 100%);">
-          <span class="photo-card-flag" aria-hidden="true">🇧🇷</span>
-          <div class="photo-card-caption">
-            <strong>Copacabana</strong>
-            <span>Brazil</span>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" role="listitem">
-        <div class="photo-card-fill" style="background:linear-gradient(160deg,#FFD166 0%,#FF5E36 100%);">
-          <span class="photo-card-flag" aria-hidden="true">🇲🇦</span>
-          <div class="photo-card-caption">
-            <strong>Sahara Desert</strong>
-            <span>Morocco</span>
-          </div>
-        </div>
-      </div>
+      <!-- Real posts from @2as_inc, each already a finished share card, so
+           the card here is just a frame around the image — no extra
+           caption overlay is added on top of the one baked into the photo. -->
+      <a class="photo-card" role="listitem" href="https://www.instagram.com/2as_inc/" target="_blank" rel="noopener noreferrer" aria-label="Open @2as_inc on Instagram">
+        <img src="assets/gallery/sunset-01.jpg" alt="A+ Sunsets post: &quot;Go find your own sunset. Tag someone who needs to unplug tonight.&quot; over a gold and lavender sunset above a lake." loading="lazy" width="1080" height="1350">
+      </a>
+      <a class="photo-card" role="listitem" href="https://www.instagram.com/2as_inc/" target="_blank" rel="noopener noreferrer" aria-label="Open @2as_inc on Instagram">
+        <img src="assets/gallery/sunset-02.jpg" alt="A+ Sunsets post: &quot;Put the phone down. This one only works if you actually look up.&quot; over a dusk sky behind silhouetted trees." loading="lazy" width="1080" height="1350">
+      </a>
+      <a class="photo-card" role="listitem" href="https://www.instagram.com/2as_inc/" target="_blank" rel="noopener noreferrer" aria-label="Open @2as_inc on Instagram">
+        <img src="assets/gallery/sunset-03.jpg" alt="A+ Sunsets post: &quot;No filter beats being there. The sky doesn't need your notifications to be beautiful.&quot; over a golden-hour sky with dark clouds." loading="lazy" width="1080" height="1350">
+      </a>
     </div>
   </div>
   <div class="photo-rail" aria-hidden="true"><span></span></div>
