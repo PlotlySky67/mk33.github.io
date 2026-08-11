@@ -8,8 +8,8 @@
 <meta name="keywords" content="приложение закаты, галерея закатов, фотоприложение, фотография неба, скачать">
 <meta name="author" content="Awesome Solutions & Software">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#1a0e2e">
-<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#FAFAFA">
+<meta name="color-scheme" content="light">
 <meta name="format-detection" content="telephone=no">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
@@ -77,20 +77,20 @@
 
 <style>
   :root{
-    color-scheme:dark;
-    /* ---- palette: the same sunset accents as the rest of the site, on a
-       white ground instead of the night sky the other pages use ---- */
-    --night:#160a26;       /* page background, top of sky just past dusk */
-    --plum:#5c1e52;
-    --magenta:#b23a63;
-    --ember:#f0602e;
-    --gold:#ffb627;        /* sun core, used as a fill on buttons/badges */
-        --hot:#ff5a5f;         /* accent / CTA */
-    --cream:#fff3e2;       /* all running text: white on dark, black (--ink) on light fills */
-    --cream-dim:rgba(255,243,226,0.82);
-    --line:rgba(255,243,226,0.14);
-    --line-strong:rgba(255,243,226,0.30);
-    --ink:#120819;         /* text sitting on top of gold/instagram fills */
+    color-scheme:light;
+    /* ---- palette: a real sunset arc, matching the rest of the site ---- */
+    --night:#FAFAFA;       /* page background, top of sky just past dusk */
+    --plum:#FFD166;
+    --magenta:#FF8A5B;
+    --ember:#FF5E36;
+    --gold:#FF5E36;        /* sun core, used as a fill on buttons/badges/accents, never as text */
+    --hot:#FFD166;         /* accent / CTA */
+    --cream:#18181B;       /* all running text: white on dark, black (--ink) on light fills */
+    --cream-dim:rgba(24,24,27,0.82);
+    --line:rgba(24,24,27,0.14);
+    --line-strong:rgba(24,24,27,0.30);
+    --ink:#FFFFFF;         /* text sitting on top of gold/instagram fills */
+    --anthracite:#18181B;
     /* ---- borrowed from Instagram's mark, used only for the "follow us"
        moments so it reads as a deliberate nod, not a re-theme ---- */
     --ig-1:#feda75;
@@ -99,8 +99,8 @@
     --ig-4:#962fbf;
     --ig-5:#4f5bd5;
     --ig-gradient:linear-gradient(45deg, var(--ig-1), var(--ig-2), var(--ig-3), var(--ig-4), var(--ig-5));
-    --card-bg:rgba(255,255,255,0.045);
-    --card-border:rgba(255,255,255,0.09);
+    --card-bg:rgba(255,255,255,0.6);
+    --card-border:rgba(24,24,27,0.08);
     --card-radius:20px;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -169,7 +169,7 @@
     display:flex; flex-direction:column; align-items:stretch;
     padding:16px 6vw 12px;
     border-bottom:1px solid var(--line);
-    background:rgba(22,10,38,0.86);
+    background:rgba(250,250,250,0.86);
     backdrop-filter:blur(10px);
     -webkit-backdrop-filter:blur(10px);
   }
@@ -224,15 +224,15 @@
     display:flex; align-items:center; justify-content:center;
     width:38px; height:34px;
     padding:0;
-    background:rgba(255,243,226,0.06);
+    background:rgba(24,24,27,0.05);
     border:2px solid var(--line-strong);
     cursor:pointer;
     transition:background .15s ease, border-color .15s ease, transform .12s ease;
   }
-  .nav-menu-btn svg{width:22px; height:13px; display:block;}@media (hover:hover){ .nav-menu-btn:hover{background:rgba(255,243,226,0.12); border-color:var(--cream);} }
+  .nav-menu-btn svg{width:22px; height:13px; display:block;}@media (hover:hover){ .nav-menu-btn:hover{background:rgba(24,24,27,0.1); border-color:var(--cream);} }
   .nav-menu-btn[aria-expanded="true"]{
     background:var(--gold); border-color:var(--cream);
-    box-shadow:3px 3px 0 #1a1006;
+    box-shadow:0 6px 16px rgba(24,24,27,0.18);
     transform:translate(-1px,-1px);
   }
   .nav-menu{
@@ -242,9 +242,9 @@
     width:236px;
     max-height:calc(100vh - 96px); overflow-y:auto;
     padding:0;
-    background:#1d0c30;
+    background:#fff;
     border:2px solid var(--cream);
-    box-shadow:5px 5px 0 #1a1006;
+    box-shadow:0 20px 46px rgba(24,24,27,0.22);
     animation:menu-drop .16s ease-out;
     transform-origin:top right;
   }
@@ -253,7 +253,7 @@
     content:"";
     position:absolute; top:-7px; right:12px;
     width:10px; height:10px;
-    background:#1d0c30;
+    background:#fff;
     border-top:2px solid var(--cream);
     border-left:2px solid var(--cream);
     transform:rotate(45deg);
@@ -270,8 +270,9 @@
     flex:0 0 auto;
     display:flex; align-items:center; justify-content:center;
     width:32px; height:32px;
-    background:rgba(255,243,226,0.07);
+    background:rgba(24,24,27,0.05);
     border:1px solid var(--line-strong);
+    border-radius:50%;
   }
   .menu-avatar svg{width:20px; height:12px; display:block;}
   .menu-id{display:flex; flex-direction:column; min-width:0;}
@@ -294,7 +295,7 @@
     color:var(--cream-dim);
     padding:12px 9px;
     transition:background .13s ease, color .13s ease;
-  }@media (hover:hover){ .nav-menu a:hover{background:rgba(255,243,226,0.08); color:var(--cream);} }
+  }@media (hover:hover){ .nav-menu a:hover{background:rgba(24,24,27,0.06); color:var(--cream);} }
   .nav-menu a[aria-current="page"]{color:var(--cream);}
   .nav-menu a[aria-current="page"] .mi{color:var(--cream);}
   .mi{
@@ -342,7 +343,7 @@
   /* ---------- FOOTER ---------- */
   footer{
     padding:34px 6vw 50px;
-    background:var(--ink);
+    background:var(--night);
     content-visibility:auto;
     contain-intrinsic-size:auto 560px;
   }
@@ -355,9 +356,9 @@
     flex-wrap:wrap; gap:20px;
     padding:18px 22px;
     max-width:1200px; margin:0 auto;
-    background:#241505;
+    background:var(--anthracite);
     border:2px solid var(--cream);
-    box-shadow:4px 4px 0 #1a1006;
+    box-shadow:0 14px 30px rgba(24,24,27,0.18);
     clip-path:polygon(
       0 6px, 6px 6px, 6px 0,
       calc(100% - 6px) 0, calc(100% - 6px) 6px, 100% 6px,
@@ -412,20 +413,22 @@
   }
   .footer-links{display:flex; gap:10px; flex-wrap:wrap;}
   .footer-links a{
-    font-family:'Press Start 2P', monospace;
-    font-size:9px;
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    font-size:11px;
     letter-spacing:0.02em;
-    color:var(--cream);
-    padding:7px 12px;
-    border:2px solid var(--cream);
-    background:rgba(255,243,226,0.06);
+    color:#fff;
+    padding:8px 14px;
+    border:1px solid rgba(255,255,255,0.3);
+    border-radius:999px;
+    background:rgba(255,255,255,0.06);
     transition:background .15s ease, color .15s ease, transform .12s ease, box-shadow .12s ease;
   }@media (hover:hover){ .footer-links a:hover{
     background:var(--gold);
-    color:var(--ink);
-    border-color:var(--ink);
+    color:#fff;
+    border-color:var(--gold);
     transform:translate(-2px,-2px);
-    box-shadow:2px 2px 0 #1a1006;
+    box-shadow:0 6px 14px rgba(24,24,27,0.18);
   } }
   .footer-brand{
     font-size:11px; color:rgba(255,243,226,0.72); letter-spacing:0.04em;
@@ -591,7 +594,7 @@
   .stores-note{
     font-family:'Space Mono',monospace;
     font-size:8.5px; letter-spacing:0.06em;
-    color:rgba(255,243,226,0.62);
+    color:var(--cream-dim);
   }
 
   /* feature grid: two-up cards rather than a stacked list of rows, closer
@@ -842,84 +845,84 @@
   </section>
 
   <section class="dl-section" aria-labelledby="dl-features-h">
-    <h2 id="dl-features-h" class="display">What's actually in it.</h2>
-    <p class="lead">One app, built for one thing: the sky you stopped for. No feed of everything else.</p>
+    <h2 id="dl-features-h" class="display">Что здесь есть на самом деле.</h2>
+    <p class="lead">Одно приложение, созданное для одного: неба, ради которого вы остановились. Никакой ленты со всем остальным.</p>
     <div class="feature-grid">
       <div class="feature-card card">
         <div class="icon" aria-hidden="true">🌇</div>
-        <h3>Personal sky gallery</h3>
-        <p>Every sunset you save is organized automatically by place and date, sitting in <span class="shine-word">YOUR</span> profile, not a shared public feed.</p>
+        <h3>Личная галерея закатов</h3>
+        <p>Каждый сохранённый закат автоматически сортируется по месту и дате в <span class="shine-word">ВАШЕМ</span> профиле, а не в общей публичной ленте.</p>
       </div>
       <div class="feature-card card">
         <div class="icon" aria-hidden="true">📍</div>
-        <h3>Location tagged</h3>
-        <p>Every photo remembers where you were standing, so you can see where <span class="shine-word">YOUR</span> best skies happened and go back.</p>
+        <h3>Метка местоположения</h3>
+        <p>Каждое фото помнит, где вы стояли, так что вы можете увидеть, где случились <span class="shine-word">ВАШИ</span> лучшие закаты, и вернуться туда.</p>
       </div>
       <div class="feature-card card">
         <div class="icon" aria-hidden="true">✨</div>
-        <h3>Built for one thing</h3>
-        <p>Scroll a feed that's nothing but <span class="shine-word">YOUR</span> sunsets: no ads, no strangers, no algorithm deciding what you see.</p>
+        <h3>Создано ради одного</h3>
+        <p>Листайте ленту, в которой нет ничего, кроме <span class="shine-word">ВАШИХ</span> закатов: ни рекламы, ни незнакомцев, ни алгоритма, решающего, что вы видите.</p>
       </div>
       <div class="feature-card card">
         <div class="icon" aria-hidden="true">🔔</div>
-        <h3>Launch-day notification</h3>
-        <p>Leave your email once and we send exactly one message, the day it goes live. Nothing before, nothing after.</p>
+        <h3>Уведомление о запуске</h3>
+        <p>Оставьте email один раз, и мы отправим ровно одно сообщение — в день запуска. Ничего до, ничего после.</p>
       </div>
     </div>
   </section>
 
   <section class="dl-section" aria-labelledby="dl-steps-h">
-    <h2 id="dl-steps-h" class="display">How it'll work.</h2>
-    <p class="lead">Three steps, start to finish.</p>
+    <h2 id="dl-steps-h" class="display">Как это будет работать.</h2>
+    <p class="lead">Три шага, от начала до конца.</p>
     <div class="steps">
       <div class="step card">
         <span class="step-num">01</span>
-        <h3>Catch the sky</h3>
-        <p>Open the app when a sunset stops you, snap it, and save it straight into your gallery.</p>
+        <h3>Поймать небо</h3>
+        <p>Откройте приложение, когда закат заставит вас остановиться, сфотографируйте и сохраните прямо в свою галерею.</p>
       </div>
       <div class="step card">
         <span class="step-num">02</span>
-        <h3>It tags itself</h3>
-        <p>Place and date are added automatically, so every sky lands sorted without any extra work.</p>
+        <h3>Оно само себя отмечает</h3>
+        <p>Место и дата добавляются автоматически, так что каждое небо сортируется без лишней работы.</p>
       </div>
       <div class="step card">
         <span class="step-num">03</span>
-        <h3>Watch it grow</h3>
-        <p>Scroll back through your own collection any time. It stays brighter and longer than the eleven minutes it actually lasted.</p>
+        <h3>Смотрите, как растёт коллекция</h3>
+        <p>Возвращайтесь к своей коллекции в любое время. Она остаётся ярче и дольше, чем те одиннадцать минут, что закат длился на самом деле.</p>
       </div>
     </div>
   </section>
 
   <section class="dl-section" aria-labelledby="dl-faq-h">
-    <h2 id="dl-faq-h" class="display">Questions, answered.</h2>
+    <h2 id="dl-faq-h" class="display">Вопросы и ответы.</h2>
     <div class="faq-item card">
-      <h3>When does it launch?</h3>
-      <p>August 12, 2026, on both iOS and Android. The date moved from August 1 while we finished acquiring some software licences the app depends on.</p>
+      <h3>Когда запуск?</h3>
+      <p>12 августа 2026 года, одновременно на iOS и Android. Дата сдвинулась с 1 августа, пока мы завершали оформление некоторых программных лицензий, от которых зависит приложение.</p>
     </div>
     <div class="faq-item card">
-      <h3>Is it free?</h3>
-      <p>Yes. There's nothing to buy here. This page and the rest of the site collect nothing beyond the email you choose to leave for the launch notice.</p>
+      <h3>Это бесплатно?</h3>
+      <p>Да. Здесь нечего покупать. Эта страница и весь остальной сайт не собирают ничего, кроме email, который вы сами оставляете для уведомления о запуске.</p>
     </div>
     <div class="faq-item card">
-      <h3>Do I need an account to use it?</h3>
-      <p>Accounts open at launch, alongside the app. Nothing to set up before then.</p>
+      <h3>Нужен ли аккаунт, чтобы им пользоваться?</h3>
+      <p>Аккаунты откроются в день запуска, вместе с приложением. До этого момента ничего настраивать не нужно.</p>
     </div>
     <div class="faq-item card">
-      <h3>What happens with my email?</h3>
-      <p>It's held by our form processor, Formspree, and used once, to send the launch notice on August 12. Write to <a class="shine-word" href="mailto:awesomesunsets22@gmail.com?subject=A%2B%20Sunsets">awesomesunsets22@gmail.com</a> any time to see or delete it.</p>
+      <h3>Что происходит с моим email?</h3>
+      <p>Он хранится у нашего обработчика форм, Formspree, и используется один раз — чтобы отправить уведомление о запуске 12 августа. Напишите на <a class="shine-word" href="mailto:awesomesunsets22@gmail.com?subject=A%2B%20Sunsets">awesomesunsets22@gmail.com</a> в любое время, чтобы увидеть или удалить эти данные.</p>
     </div>
   </section>
 
   <div class="dl-cta">
-    <p>Want to be first through the door on launch day?</p>
+    <p>Хотите узнать первыми в день запуска?</p>
     <div class="cta-row">
       <a class="btn-primary" href="index.html#signup">
         <svg class="mi" viewBox="0 0 20 20" aria-hidden="true" style="width:15px;height:15px;"><use href="#i-bell"/></svg>
-        Notify me
+        Уведомить меня
       </a>
       <a class="btn-instagram" href="https://www.instagram.com/2as_inc/" target="_blank" rel="noopener noreferrer">
         <svg class="mi" viewBox="0 0 20 20" aria-hidden="true"><use href="#i-instagram"/></svg>
-        Follow @2as_inc
+        Подписаться на @2as_inc
       </a>
     </div>
   </div>

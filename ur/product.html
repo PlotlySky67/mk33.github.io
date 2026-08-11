@@ -8,8 +8,8 @@
 <meta name="keywords" content="غروب آفتاب ایپ, غروب آفتاب گیلری, فوٹو ایپ, آسمان کی فوٹوگرافی">
 <meta name="author" content="Awesome Solutions & Software">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#1a0e2e">
-<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#FAFAFA">
+<meta name="color-scheme" content="light">
 <meta name="format-detection" content="telephone=no">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
@@ -77,19 +77,20 @@
 
 <style>
   :root{
-    color-scheme:dark;
-    /* ---- palette: a real sunset arc, not a flat two-tone gradient ---- */
-    --night:#160a26;      /* top of sky, just past dusk */
-    --plum:#5c1e52;       /* upper-mid dusk */
-    --magenta:#b23a63;    /* mid transition */
-    --ember:#f0602e;      /* lower sky */
-    --gold:#ffb627;       /* sun core */
-    --hot:#ff5a5f;        /* accent / CTA */
-    --cream:#fff3e2;      /* text on dark */
-    --cream-dim:rgba(255,243,226,0.82);
-    --line:rgba(255,243,226,0.14);
-    --line-strong:rgba(255,243,226,0.30);
-    --ink:#120819;
+    color-scheme:light;
+    /* ---- palette: "Citrus Glow" — cotton white ground, coral/solar accents ---- */
+    --night:#FAFAFA;       /* cotton white — page background */
+    --plum:#FFD166;        /* solar yellow */
+    --magenta:#FF8A5B;     /* mid-point between yellow and coral */
+    --ember:#FF5E36;       /* coral orange */
+    --gold:#FF5E36;        /* coral — primary accent / CTA fill */
+    --hot:#FFD166;         /* solar yellow — secondary accent */
+    --cream:#18181B;       /* anthracite — main text, dark on light now */
+    --cream-dim:rgba(24,24,27,0.68);
+    --line:rgba(24,24,27,0.08);
+    --line-strong:rgba(24,24,27,0.18);
+    --ink:#FFFFFF;          /* text/icons sitting on a coral or yellow fill */
+    --anthracite:#18181B;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   /* Painted on <html> as well as <body>: several in-app viewers (iOS Files,
@@ -168,7 +169,7 @@
     display:flex; flex-direction:column; align-items:stretch;
     padding:16px 6vw 12px;
     border-bottom:1px solid var(--line);
-    background:rgba(22,10,38,0.86);
+    background:rgba(250,250,250,0.86);
     backdrop-filter:blur(10px);
     -webkit-backdrop-filter:blur(10px);
   }
@@ -232,15 +233,15 @@
     display:flex; align-items:center; justify-content:center;
     width:38px; height:34px;
     padding:0;
-    background:rgba(255,243,226,0.06);
+    background:rgba(24,24,27,0.05);
     border:2px solid var(--line-strong);
     cursor:pointer;
     transition:background .15s ease, border-color .15s ease, transform .12s ease;
   }
-  .nav-menu-btn svg{width:22px; height:13px; display:block;}@media (hover:hover){ .nav-menu-btn:hover{background:rgba(255,243,226,0.12); border-color:var(--cream);} }
+  .nav-menu-btn svg{width:22px; height:13px; display:block;}@media (hover:hover){ .nav-menu-btn:hover{background:rgba(24,24,27,0.1); border-color:var(--cream);} }
   .nav-menu-btn[aria-expanded="true"]{
     background:var(--gold); border-color:var(--cream);
-    box-shadow:3px 3px 0 #1a1006;
+    box-shadow:0 6px 16px rgba(24,24,27,0.18);
     transform:translate(-1px,-1px);
   }
   .nav-menu{
@@ -250,9 +251,9 @@
     width:236px;
     max-height:calc(100vh - 96px); overflow-y:auto;
     padding:0;
-    background:#1d0c30;
+    background:#fff;
     border:2px solid var(--cream);
-    box-shadow:5px 5px 0 #1a1006;
+    box-shadow:0 20px 46px rgba(24,24,27,0.22);
     animation:menu-drop .16s ease-out;
     transform-origin:top right;
   }
@@ -263,7 +264,7 @@
     content:"";
     position:absolute; top:-7px; right:12px;
     width:10px; height:10px;
-    background:#1d0c30;
+    background:#fff;
     border-top:2px solid var(--cream);
     border-left:2px solid var(--cream);
     transform:rotate(45deg);
@@ -282,8 +283,9 @@
     flex:0 0 auto;
     display:flex; align-items:center; justify-content:center;
     width:32px; height:32px;
-    background:rgba(255,243,226,0.07);
+    background:rgba(24,24,27,0.05);
     border:1px solid var(--line-strong);
+    border-radius:50%;
   }
   .menu-avatar svg{width:20px; height:12px; display:block;}
   .menu-id{display:flex; flex-direction:column; min-width:0;}
@@ -307,7 +309,7 @@
     color:var(--cream-dim);
     padding:12px 9px;
     transition:background .13s ease, color .13s ease;
-  }@media (hover:hover){ .nav-menu a:hover{background:rgba(255,243,226,0.08); color:var(--cream);} }
+  }@media (hover:hover){ .nav-menu a:hover{background:rgba(24,24,27,0.06); color:var(--cream);} }
   .nav-menu a[aria-current="page"]{color:var(--cream);}
   .nav-menu a[aria-current="page"] .mi{color:var(--gold);}
   .mi{
@@ -358,7 +360,7 @@
   /* ---------- FOOTER ---------- */
   footer{
     padding:34px 6vw 50px;
-    background:var(--ink);
+    background:var(--night);
     /* The tallest block on the page, and it starts below the fold. Skipping
        its layout and paint until it is scrolled to takes that work out of
        first paint, which is the frame that matters when the page is being
@@ -371,9 +373,9 @@
     flex-wrap:wrap; gap:20px;
     padding:18px 22px;
     max-width:1200px; margin:0 auto;
-    background:#241505;
+    background:var(--anthracite);
     border:2px solid var(--cream);
-    box-shadow:4px 4px 0 #1a1006;
+    box-shadow:0 14px 30px rgba(24,24,27,0.18);
     clip-path:polygon(
       0 6px, 6px 6px, 6px 0,
       calc(100% - 6px) 0, calc(100% - 6px) 6px, 100% 6px,
@@ -393,7 +395,7 @@
   }
   .footer-col p{
     font-size:13.5px; line-height:1.75;
-    color:rgba(255,243,226,0.78);
+    color:rgba(24,24,27,0.78);
     max-width:44ch;
   }
   @media (max-width:760px){
@@ -419,7 +421,7 @@
   .footer-links-grid span{
     justify-self:start;
     font-size:13px; line-height:1.45;
-    color:rgba(255,243,226,0.72);
+    color:rgba(24,24,27,0.72);
     padding:10px 1px;
     cursor:default;
   }
@@ -437,20 +439,22 @@
 
   .footer-links{display:flex; gap:10px; flex-wrap:wrap;}
   .footer-links a{
-    font-family:'Press Start 2P', monospace;
-    font-size:9px;
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    font-size:11px;
     letter-spacing:0.02em;
-    color:var(--cream);
-    padding:7px 12px;
-    border:2px solid var(--cream);
-    background:rgba(255,243,226,0.06);
+    color:#fff;
+    padding:8px 14px;
+    border:1px solid rgba(255,255,255,0.3);
+    border-radius:999px;
+    background:rgba(255,255,255,0.06);
     transition:background .15s ease, color .15s ease, transform .12s ease, box-shadow .12s ease;
   }@media (hover:hover){ .footer-links a:hover{
     background:var(--gold);
-    color:var(--ink);
-    border-color:var(--ink);
+    color:#fff;
+    border-color:var(--gold);
     transform:translate(-2px,-2px);
-    box-shadow:2px 2px 0 #1a1006;
+    box-shadow:0 6px 14px rgba(24,24,27,0.18);
   } }
   .footer-brand{
     font-size:11px; color:rgba(255,243,226,0.72); letter-spacing:0.04em;
@@ -485,7 +489,7 @@
     display:inline-flex; align-items:center; gap:10px;
     font-family:'Space Mono',monospace;
     font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
-    color:#ffd9a8;
+    color:var(--gold);
     margin-bottom:18px;
   }
   .page-eyebrow::before{
@@ -522,6 +526,34 @@
     background:linear-gradient(90deg, var(--gold), var(--hot));
     border-radius:3px;
   }
+
+  /* ---------- ACTION ROW ----------
+     Nothing on this page is built yet, but the reader shouldn't hit a dead
+     end while it isn't: the same rounded, action-oriented buttons used on
+     the download page, so every page on the site ends in something to tap. */
+  .cta-row{display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:26px;}
+  .btn-primary, .btn-instagram{
+    display:inline-flex; align-items:center; gap:9px;
+    font-family:'Inter',sans-serif;
+    font-size:14.5px; font-weight:700;
+    padding:13px 24px;
+    border-radius:999px;
+    border:none;
+    cursor:pointer;
+    transition:transform .16s ease, box-shadow .16s ease, filter .16s ease;
+  }
+  .btn-primary{
+    background:var(--gold); color:var(--ink);
+    box-shadow:0 6px 18px rgba(255,182,39,0.28);
+  }@media (hover:hover){ .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(255,182,39,0.38);} }
+  .btn-primary:active{transform:translateY(0);}
+  .btn-instagram{
+    background:linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+    color:#fff;
+    box-shadow:0 8px 22px rgba(214,41,118,0.38);
+  }@media (hover:hover){ .btn-instagram:hover{transform:translateY(-2px); box-shadow:0 12px 28px rgba(214,41,118,0.48);} }
+  .btn-instagram:active{transform:translateY(0);}
+  .btn-instagram .mi{width:16px; height:16px;}
   @media (max-width:760px){
     .page-stage{padding:calc(74px + 5vh) 5vw calc(5vh + env(safe-area-inset-bottom));}
     /* The footer drops its own 22px inset at this width; the head follows. */
@@ -652,6 +684,16 @@
     <h1 class="page-title">ہماری پروڈکٹ۔</h1>
     <p class="page-status">ابھی لوڈ ہو رہا ہے&hellip;</p>
     <div class="page-rule" aria-hidden="true"></div>
+    <div class="cta-row">
+      <a class="btn-primary" href="index.html#signup">
+        <svg class="mi" viewBox="0 0 20 20" aria-hidden="true" style="width:15px;height:15px;"><use href="#i-bell"/></svg>
+        مجھے مطلع کریں
+      </a>
+      <a class="btn-instagram" href="https://www.instagram.com/2as_inc/" target="_blank" rel="noopener noreferrer">
+        <svg class="mi" viewBox="0 0 20 20" aria-hidden="true"><use href="#i-instagram"/></svg>
+        @2as_inc کو فالو کریں
+      </a>
+    </div>
   </div>
 </main>
 
