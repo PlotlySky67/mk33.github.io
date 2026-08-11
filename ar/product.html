@@ -229,20 +229,27 @@
      The mark again, at button size, on the opposite end of the bar from the
      brand: the two arcs bracket the navigation. */
   .nav-menu-btn{
+    order:1;
     flex:0 0 auto;
     display:flex; align-items:center; justify-content:center;
     width:38px; height:34px;
     padding:0;
-    background:rgba(24,24,27,0.05);
-    border:2px solid var(--line-strong);
+    background:rgba(255,59,48,0.06);
+    border:2px solid #FF3B30;
     cursor:pointer;
     transition:background .15s ease, border-color .15s ease, transform .12s ease;
+    animation:profile-btn-pulse 1.8s ease-in-out infinite;
   }
-  .nav-menu-btn svg{width:22px; height:13px; display:block;}@media (hover:hover){ .nav-menu-btn:hover{background:rgba(24,24,27,0.1); border-color:var(--cream);} }
+  @keyframes profile-btn-pulse{
+    0%, 100%{ box-shadow:0 0 0 0 rgba(255,59,48,0.55); }
+    50%     { box-shadow:0 0 0 6px rgba(255,59,48,0); }
+  }
+  .nav-menu-btn svg{width:22px; height:13px; display:block;}@media (hover:hover){ .nav-menu-btn:hover{background:rgba(255,59,48,0.12);} }
   .nav-menu-btn[aria-expanded="true"]{
     background:var(--gold); border-color:var(--cream);
     box-shadow:0 6px 16px rgba(24,24,27,0.18);
     transform:translate(-1px,-1px);
+    animation:none;
   }
   .nav-menu{
     position:absolute; top:calc(100% + 9px); right:0;
@@ -330,7 +337,7 @@
      site ships in. Each entry is a plain link to that language's copy of
      the current page, so picking one is an instant, ordinary navigation —
      the menu around it is progressive enhancement, not a requirement. */
-  .lang-switch{position:relative; flex:0 0 auto; margin-right:10px;}
+  .lang-switch{order:2; position:relative; flex:0 0 auto; margin-right:10px;}
   .lang-switch-btn{
     display:flex; align-items:center; justify-content:center;
     width:38px; height:34px;

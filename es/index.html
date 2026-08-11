@@ -505,24 +505,33 @@
      The mark again, at button size, on the opposite end of the bar from the
      brand: the two arcs bracket the navigation. */
   .nav-menu-btn{
+    order:1;
     flex:0 0 auto;
     display:flex; align-items:center; justify-content:center;
     width:46px; height:40px;
     padding:0;
     /* A soft anthracite fill so the arc mark's own gold/coral/ember strokes
        (hardcoded on the <use> source, which CSS here can't repaint) stay
-       readable against it. */
+       readable against it. Now paired with a pulsing red ring so the
+       profile button reads as distinct from the language switcher beside
+       it, not just another nav icon. */
     background:var(--anthracite);
-    border:none;
+    border:2px solid #FF3B30;
     border-radius:12px;
     box-shadow:0 6px 16px rgba(24,24,27,0.18);
     cursor:pointer;
     transition:background .15s ease, transform .12s ease, box-shadow .12s ease;
+    animation:profile-btn-pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes profile-btn-pulse{
+    0%, 100%{ box-shadow:0 0 0 0 rgba(255,59,48,0.55); }
+    50%     { box-shadow:0 0 0 6px rgba(255,59,48,0); }
   }
   .nav-menu-btn:active{transform:translateY(1px);}
   .nav-menu-btn svg{width:26px; height:15px; display:block;}@media (hover:hover){ .nav-menu-btn:hover{background:#000;} }
   .nav-menu-btn[aria-expanded="true"]{
     background:var(--gold);
+    animation:none;
     box-shadow:0 8px 20px rgba(255,94,54,0.35);
   }
   .nav-menu{
@@ -1231,7 +1240,7 @@
      site ships in. Each entry is a plain link to that language's copy of
      the current page, so picking one is an instant, ordinary navigation —
      the menu around it is progressive enhancement, not a requirement. */
-  .lang-switch{position:relative; flex:0 0 auto; margin-right:10px;}
+  .lang-switch{order:2; position:relative; flex:0 0 auto; margin-right:10px;}
   .lang-switch-btn{
     display:flex; align-items:center; justify-content:center;
     width:38px; height:34px;
