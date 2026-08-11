@@ -308,35 +308,56 @@
   .nav-menu .ext{margin-left:auto; font-size:10px; line-height:1; opacity:0.55;}
 
 
-  /* ---------- LANGUAGE FLAG SWITCHER ----------
-     Cycles through the other available languages for this same page, one
-     flag fading in as the previous fades out. Only the visible flag is a
-     real, focusable link — the hidden ones are inert until their turn. */
-  .lang-flag{
-    position:relative;
-    width:26px; height:22px;
-    flex:0 0 auto;
-    margin-right:12px;
-  }
-  .lang-flag-item{
-    position:absolute; inset:0;
+  /* ---------- LANGUAGE SWITCHER ----------
+     A small flag button that opens the full list of every language the
+     site ships in. Each entry is a plain link to that language's copy of
+     the current page, so picking one is an instant, ordinary navigation —
+     the menu around it is progressive enhancement, not a requirement. */
+  .lang-switch{position:relative; flex:0 0 auto; margin-right:10px;}
+  .lang-switch-btn{
     display:flex; align-items:center; justify-content:center;
-    font-size:18px; line-height:1;
-    text-decoration:none;
-    border-radius:5px;
-    opacity:0;
-    transform:scale(.82);
-    transition:opacity .4s ease, transform .4s ease;
-    pointer-events:none;
+    width:38px; height:34px;
+    padding:0;
+    background:rgba(24,24,27,0.05);
+    border:2px solid var(--line-strong);
+    border-radius:50%;
+    font-size:17px; line-height:1;
+    cursor:pointer;
+    transition:background .15s ease, border-color .15s ease, transform .12s ease;
+  }@media (hover:hover){ .lang-switch-btn:hover{background:rgba(24,24,27,0.1); border-color:var(--cream);} }
+  .lang-switch-btn[aria-expanded="true"]{
+    background:var(--gold); border-color:var(--cream);
+    box-shadow:0 6px 16px rgba(24,24,27,0.18);
   }
-  .lang-flag-item.is-active{
-    opacity:1;
-    transform:scale(1);
-    pointer-events:auto;
-  }@media (hover:hover){ .lang-flag-item.is-active:hover{transform:scale(1.14);} }
+  .lang-switch-menu{
+    position:absolute; top:calc(100% + 9px); inset-inline-end:0;
+    z-index:60;
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:2px;
+    width:296px;
+    max-height:calc(100vh - 120px); overflow-y:auto;
+    padding:8px;
+    background:#fff;
+    border:2px solid var(--cream);
+    border-radius:16px;
+    box-shadow:0 20px 46px rgba(24,24,27,0.22);
+    animation:menu-drop .16s ease-out;
+    transform-origin:top right;
+  }
+  .lang-switch-menu[hidden]{display:none;}
+  .lang-switch-menu a{
+    display:flex; align-items:center; gap:8px;
+    font-family:'Inter',sans-serif; font-size:12.5px; font-weight:700;
+    color:var(--cream-dim);
+    padding:9px 10px;
+    border-radius:10px;
+    transition:background .13s ease, color .13s ease;
+  }@media (hover:hover){ .lang-switch-menu a:hover{background:rgba(24,24,27,0.06); color:var(--cream);} }
+  .lang-switch-menu a[aria-current="true"]{color:var(--gold); background:rgba(255,94,54,0.08);}
+  .lang-switch-menu .flag{font-size:16px; flex:0 0 auto;}
   @media (max-width:440px){
-    .lang-flag{width:22px; height:20px; margin-right:8px;}
-    .lang-flag-item{font-size:15px;}
+    .lang-switch-btn{width:34px; height:32px; font-size:15px;}
+    .lang-switch-menu{width:min(296px, calc(100vw - 32px));}
   }
 
 
@@ -722,10 +743,24 @@
       <li><a href="profile.html">प्रोफ़ाइल</a></li>
       <li><a href="download.html" aria-current="page">ऐप पाएँ</a></li>
     </ul>
-    <div class="lang-flag" id="lang-flag" role="group" aria-label="अन्य उपलब्ध भाषाएँ">
-      <a href="../ro/download.html" class="lang-flag-item is-active" lang="ro" aria-label="Română">🇷🇴</a>
-      <a href="../it/download.html" class="lang-flag-item" lang="it" aria-label="Italiano">🇮🇹</a>
-      <a href="../es/download.html" class="lang-flag-item" lang="es" aria-label="Español">🇪🇸</a>
+    <div class="lang-switch">
+      <button type="button" class="lang-switch-btn" id="lang-switch-btn" aria-expanded="false" aria-controls="lang-switch-menu" aria-label="अन्य उपलब्ध भाषाएँ">
+        <span aria-hidden="true">🇮🇳</span>
+      </button>
+      <div class="lang-switch-menu" id="lang-switch-menu" role="menu" aria-label="अन्य उपलब्ध भाषाएँ" hidden>
+        <a href="../download.html" lang="en" hreflang="en" role="menuitem"><span class="flag" aria-hidden="true">🇬🇧</span>English</a>
+        <a href="../ro/download.html" lang="ro" hreflang="ro" role="menuitem"><span class="flag" aria-hidden="true">🇷🇴</span>Română</a>
+        <a href="../it/download.html" lang="it" hreflang="it" role="menuitem"><span class="flag" aria-hidden="true">🇮🇹</span>Italiano</a>
+        <a href="../es/download.html" lang="es" hreflang="es" role="menuitem"><span class="flag" aria-hidden="true">🇪🇸</span>Español</a>
+        <a href="../zh/download.html" lang="zh" hreflang="zh" role="menuitem"><span class="flag" aria-hidden="true">🇨🇳</span>中文</a>
+        <a href="../hi/download.html" lang="hi" hreflang="hi" role="menuitem" aria-current="true"><span class="flag" aria-hidden="true">🇮🇳</span>हिन्दी</a>
+        <a href="../fr/download.html" lang="fr" hreflang="fr" role="menuitem"><span class="flag" aria-hidden="true">🇫🇷</span>Français</a>
+        <a href="../ar/download.html" lang="ar" hreflang="ar" role="menuitem"><span class="flag" aria-hidden="true">🇸🇦</span>العربية</a>
+        <a href="../bn/download.html" lang="bn" hreflang="bn" role="menuitem"><span class="flag" aria-hidden="true">🇧🇩</span>বাংলা</a>
+        <a href="../pt/download.html" lang="pt" hreflang="pt" role="menuitem"><span class="flag" aria-hidden="true">🇧🇷</span>Português</a>
+        <a href="../ru/download.html" lang="ru" hreflang="ru" role="menuitem"><span class="flag" aria-hidden="true">🇷🇺</span>Русский</a>
+        <a href="../ur/download.html" lang="ur" hreflang="ur" role="menuitem"><span class="flag" aria-hidden="true">🇵🇰</span>اردو</a>
+      </div>
     </div>
     <button type="button" class="nav-menu-btn" id="menu-btn"
             aria-expanded="false" aria-controls="nav-menu" aria-label="मेनू खोलें">
@@ -1039,30 +1074,34 @@
 </script>
 
 <script>
-  // Language-flag switcher: rotates the other available locales for this
-  // page, fading one out as the next fades in. Only the currently-shown
-  // flag is tabbable/announced; the rest sit inert until their turn.
+  // Language switcher: opens a menu of every language the site ships in.
+  // Every entry is a normal <a>, so choosing one is an instant, ordinary
+  // page load to that language's copy of the current page — this script
+  // only drives the open/close chrome around it.
   (function(){
-    var wrap = document.getElementById('lang-flag');
-    if (!wrap) return;
-    var items = Array.prototype.slice.call(wrap.querySelectorAll('.lang-flag-item'));
-    if (items.length < 2) return;
-    var i = 0;
-    function show(idx){
-      items.forEach(function(el, n){
-        var active = n === idx;
-        el.classList.toggle('is-active', active);
-        el.setAttribute('aria-hidden', active ? 'false' : 'true');
-        el.tabIndex = active ? 0 : -1;
-      });
+    var btn  = document.getElementById('lang-switch-btn');
+    var menu = document.getElementById('lang-switch-menu');
+    if (!btn || !menu) return;
+
+    function setOpen(open){
+      btn.setAttribute('aria-expanded', String(open));
+      menu.hidden = !open;
     }
-    show(0);
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-      setInterval(function(){
-        i = (i + 1) % items.length;
-        show(i);
-      }, 2200);
-    }
+
+    btn.addEventListener('click', function(){
+      var opening = menu.hidden;
+      setOpen(opening);
+      if (opening) menu.querySelector('a').focus();
+    });
+
+    document.addEventListener('click', function(e){
+      if (menu.hidden) return;
+      if (menu.contains(e.target) || btn.contains(e.target)) return;
+      setOpen(false);
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && !menu.hidden){ setOpen(false); btn.focus(); }
+    });
   })();
 </script>
 </body>
