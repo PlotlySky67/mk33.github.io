@@ -334,6 +334,23 @@
     .lang-switch-btn{width:34px; height:32px; font-size:15px;}
     .lang-switch-menu{width:min(296px, calc(100vw - 32px));}
   }
+  /* ---------- PHONE HEADER (iOS/Android) ----------
+     The horizontal link row and two icon buttons don't fit a phone width
+     together — "Get the App" was wrapping onto three lines and the
+     language button was pushed off the right edge entirely. Below 640px
+     the link row folds into the profile button's own dropdown (which
+     already lists every one of these links), and both icon buttons drop
+     to a smaller, thumb-sized footprint. margin-left:auto on the switch
+     replaces the auto-margin the hidden link row was providing, so the
+     two buttons stay pinned to the right edge instead of drifting to the
+     middle of the empty bar. */
+  @media (max-width:640px){
+    .nav-links{display:none;}
+    .lang-switch{order:2; margin-left:auto; margin-right:0;}
+    .lang-switch-btn{width:30px; height:30px; font-size:14px;}
+    .nav-menu-btn{width:30px; height:30px;}
+    .nav-menu-btn svg{width:18px; height:11px;}
+  }
 
   /* ---------- FOOTER ---------- */
   footer{
