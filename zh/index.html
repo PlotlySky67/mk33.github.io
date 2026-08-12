@@ -792,7 +792,7 @@
      zeroes, which reads as broken. */
   .countdown.is-live .unit{display:none;}
   .countdown.is-live::before{
-    content:"已上线 \2014 现已开放。";
+    content:"即将上线，敬请期待。";
     font-family:'Space Mono',monospace;
     font-size:13px; letter-spacing:0.04em; color:#fff;
   }
@@ -1760,7 +1760,7 @@
             // zeroes on screen for the rest of the app's life.
             if (diff === 0){
               if (box) box.classList.add('is-live');
-              if (sr)  sr.textContent = 'A+ Sunsets 现已上线。';
+              if (sr)  sr.textContent = 'A+ Sunsets 即将上线。';
               stop();
               return;
             }

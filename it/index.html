@@ -792,7 +792,7 @@
      zeroes, which reads as broken. */
   .countdown.is-live .unit{display:none;}
   .countdown.is-live::before{
-    content:"È uscita \2014 disponibile ora.";
+    content:"Sta ancora arrivando \2014 resta con noi.";
     font-family:'Space Mono',monospace;
     font-size:13px; letter-spacing:0.04em; color:#fff;
   }
@@ -1760,7 +1760,7 @@
             // zeroes on screen for the rest of the app's life.
             if (diff === 0){
               if (box) box.classList.add('is-live');
-              if (sr)  sr.textContent = 'A+ Sunsets è disponibile ora.';
+              if (sr)  sr.textContent = 'A+ Sunsets sta ancora arrivando.';
               stop();
               return;
             }
