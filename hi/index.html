@@ -790,12 +790,10 @@
   }
   /* Once the launch moment passes the timer stops rather than sitting on four
      zeroes, which reads as broken. */
-  .countdown.is-live .unit{display:none;}
-  .countdown.is-live::before{
-    content:"अभी आ रहा है \2014 बने रहें।";
-    font-family:'Space Mono',monospace;
-    font-size:13px; letter-spacing:0.04em; color:#fff;
-  }
+  /* Nothing accurate to say once the target date passes without a real
+     release, so the clock quietly retires instead of leaving any message
+     (claimed or hedged) sitting on the page. */
+  .countdown.is-live{display:none;}
 
   /* Launch-delay notice. Sits directly under the clock, same frosted-glass
      card as the countdown cells so it reads as part of the same object
@@ -1517,12 +1515,17 @@
      GPU budget is smallest, so they come off there and stay on desktop. */
   @media (max-width:760px){
     .grain{display:none;}
+    /* Blur alone drops here for the GPU/battery win — the background was
+       also being overridden to a dark maroon left over from the site's old
+       night-sky theme, which read as a broken red box on the current
+       Citrus Glow gradient. Each card already carries its own correct
+       translucent-white background (the same one .stores uses and never
+       had this override), so removing the color swap is the fix. */
     .countdown .unit,
     .delay-note,
     .signup{
       backdrop-filter:none;
       -webkit-backdrop-filter:none;
-      background:rgba(120,40,60,0.62);
     }
   }
 
@@ -1779,7 +1782,7 @@
         })();
       </script>
 
-      <label for="email-input" class="signup-label">अपना ईमेल जोड़ें</label>
+      <label for="email-input" class="signup-label sr-only">अपना ईमेल जोड़ें</label>
       <form class="signup" id="signup" action="https://formspree.io/f/xvzezvpj" method="POST">
         <span class="signup-icon" aria-hidden="true">
           <svg viewBox="0 0 20 20"><use href="#i-search"/></svg>
