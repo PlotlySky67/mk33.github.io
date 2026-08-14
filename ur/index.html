@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>A+ Sunsets: آپ کے غروبِ آفتاب، محفوظ۔ 12 اگست کو آ رہا ہے۔</title>
-<meta name="description" content="ان لوگوں کے لیے ایک گیلری ایپ جو رک کر آسمان کو دیکھتے ہیں۔ ہر غروبِ آفتاب کو محفوظ کریں، ٹیگ کریں، اور دوبارہ دیکھیں، جگہ اور تاریخ کے مطابق ترتیب شدہ۔ 12 اگست 2026 کو لانچ ہو رہی ہے۔">
+<title>A+ Sunsets: آپ کے غروبِ آفتاب، محفوظ۔</title>
+<meta name="description" content="ان لوگوں کے لیے ایک گیلری ایپ جو رک کر آسمان کو دیکھتے ہیں۔ ہر غروبِ آفتاب کو محفوظ کریں، ٹیگ کریں، اور دوبارہ دیکھیں، جگہ اور تاریخ کے مطابق ترتیب شدہ۔">
 <meta name="keywords" content="غروب آفتاب ایپ, غروب آفتاب گیلری, فوٹو ایپ, آسمان کی فوٹوگرافی">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Awesome Solutions & Software">
@@ -34,7 +34,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="A+ Sunsets">
 <meta property="og:title" content="A+ Sunsets: آپ کے غروبِ آفتاب، محفوظ۔">
-<meta property="og:description" content="غروبِ آفتاب کے شائقین کے لیے ایک گیلری ایپ۔ ہر آسمان کو محفوظ کریں، ٹیگ کریں، اور دوبارہ دیکھیں۔ 12 اگست 2026 کو لانچ ہو رہی ہے۔">
+<meta property="og:description" content="غروبِ آفتاب کے شائقین کے لیے ایک گیلری ایپ۔ ہر آسمان کو محفوظ کریں، ٹیگ کریں، اور دوبارہ دیکھیں۔">
 <meta property="og:url" content="https://www.assunsets.com/ur/">
 <meta property="og:image" content="https://www.assunsets.com/og-image.jpg">
 <meta property="og:image:width" content="1200">
@@ -55,7 +55,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="A+ Sunsets: آپ کے غروبِ آفتاب، محفوظ۔">
-<meta name="twitter:description" content="غروبِ آفتاب کے شائقین کے لیے ایک گیلری ایپ۔ 12 اگست 2026 کو لانچ ہو رہی ہے۔">
+<meta name="twitter:description" content="غروبِ آفتاب کے شائقین کے لیے ایک گیلری ایپ۔">
 <meta name="twitter:image" content="https://www.assunsets.com/og-image.jpg">
 
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formspree.io; base-uri 'self'; form-action 'self' https://formspree.io;">
@@ -82,7 +82,7 @@
   "name": "A+ Sunsets",
   "url": "https://www.assunsets.com/ur/",
   "sameAs": ["https://instagram.com/2as_inc"],
-  "description": "غروبِ آفتاب کے شائقین کے لیے ایک گیلری ایپ، 12 اگست 2026 کو لانچ ہو رہی ہے۔"
+  "description": "غروبِ آفتاب کے شائقین کے لیے ایک گیلری ایپ۔"
 }
 </script>
 
@@ -753,46 +753,6 @@
     color:var(--hot);
   }
 
-  /* countdown */
-  .countdown{
-    display:flex; gap:clamp(9px, 2.4vw, 14px); flex-wrap:wrap;
-    margin-bottom:clamp(28px, 6vw, 40px);
-  }
-  /* Square, 2px, hard-shadowed, the same construction as the nav button and
-     the menu panel, so the hero reads as part of the same object as the bar
-     rather than a softer thing underneath it. */
-  .countdown .unit{
-    border:1px solid rgba(255,255,255,0.35);
-    border-radius:14px;
-    background:rgba(255,255,255,0.16);
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-    padding:13px 18px;
-    min-width:76px;
-    text-align:center;
-  }
-  .countdown .num{font-family:'Space Mono',monospace; font-weight:700; font-size:28px; display:block; color:#fff; line-height:1.1;}
-  .countdown .label{
-    font-family:'Space Mono',monospace;
-    font-size:9px; letter-spacing:0.16em; text-transform:uppercase;
-    color:rgba(255,255,255,0.72); margin-top:5px; display:block;
-  }
-  /* No-script fallback. Several in-app viewers (iOS Quick Look, Messages and
-     mail previews) render HTML with scripting off, which left the cells
-     reading "--" with no explanation. Hide the dead clock, show the date. */
-  html:not(.js) .countdown{display:none;}
-  html.js .countdown-fallback{display:none;}
-  .countdown-fallback{
-    font-family:'Space Mono',monospace;
-    font-size:13px; letter-spacing:0.04em; color:#fff;
-    margin-bottom:clamp(28px, 6vw, 40px);
-  }
-  /* Once the launch moment passes the timer stops rather than sitting on four
-     zeroes, which reads as broken. */
-  /* Nothing accurate to say once the target date passes without a real
-     release, so the clock quietly retires instead of leaving any message
-     (claimed or hedged) sitting on the page. */
-  .countdown.is-live{display:none;}
 
 
   /* signup form */
@@ -1424,16 +1384,6 @@
     .store-badges{gap:10px;}
     .store-badge{max-width:none;}
 
-    /* The countdown was wrapping 3-then-1 on a 360px screen, because four
-       76px cells plus their gaps don't fit. A four-column grid keeps it as
-       one row at every width and lets the cells shrink instead of breaking. */
-    .countdown{
-      display:grid; grid-template-columns:repeat(4, 1fr);
-      gap:8px; width:100%; max-width:440px;
-    }
-    .countdown .unit{min-width:0; padding:12px 4px;}
-    .countdown .num{font-size:22px;}
-    .countdown .label{font-size:8px; letter-spacing:0.1em;}
 
     /* Room to breathe between the blocks, and taps that land where they look
        like they should: 44px is the floor Apple and Google both publish. */
@@ -1448,10 +1398,6 @@
        width and ignored the status bar inset entirely. */
   }
   @media (max-width:420px){
-    .countdown{gap:7px;}
-    .countdown .unit{padding:11px 2px;}
-    .countdown .num{font-size:19px;}
-    .countdown .label{font-size:7.5px; letter-spacing:0.06em;}
     .signup{flex-wrap:wrap;}
     /* The icon and the field share the first row; only the button wraps. */
     .signup input{flex:1 1 0; width:auto; min-width:0;}
@@ -1483,7 +1429,6 @@
        Citrus Glow gradient. Each card already carries its own correct
        translucent-white background (the same one .stores uses and never
        had this override), so removing the color swap is the fix. */
-    .countdown .unit,
     .signup{
       backdrop-filter:none;
       -webkit-backdrop-filter:none;
@@ -1553,10 +1498,6 @@
   // homepage renders after a transition. Doing this from the main script at
   // the bottom would let the page flash through first.
   (function(){
-    // Marks the document as script-capable before first paint. The countdown
-    // styles key off this: with scripts disabled the four cells would sit on
-    // "--" forever, so CSS swaps in a static launch date instead.
-    document.documentElement.className += ' js';
     try{
       if (sessionStorage.getItem('assunsets_wipe')){
         document.getElementById('page-wipe').classList.add('is-on');
@@ -1656,85 +1597,6 @@
       <p class="hero-tagline display"><span class="line-2">ایک روشن مجموعہ</span></p>
       <p class="hero-tagline-sub">یہاں نہ کچھ حاصل کرنے کی دوڑ ہے اور نہ کسی کو متاثر کرنے کی ضرورت A+ Sunsets ان آسمانوں کے لیے ایک خاموش شیلف ہے جن سے آپ واقعی <span class="pixel-word">محبت</span> کرتے ہیں</p>
 
-      <p class="sr-only" id="cd-sr">12 اگست 2026 کو لانچ ہو رہا ہے۔</p>
-      <p class="countdown-fallback">12 اگست 2026 کو لانچ ہو رہا ہے۔</p>
-      <div class="countdown" id="countdown" aria-hidden="true">
-        <div class="unit"><span class="num" id="cd-days">--</span><span class="label">دن</span></div>
-        <div class="unit"><span class="num" id="cd-hours">--</span><span class="label">گھنٹے</span></div>
-        <div class="unit"><span class="num" id="cd-mins">--</span><span class="label">منٹ</span></div>
-        <div class="unit"><span class="num" id="cd-secs">--</span><span class="label">سیکنڈ</span></div>
-      </div>
-
-      <!-- Launch moved from August 1 to August 12. Stated plainly, and placed
-           under the clock so anyone who remembers the old date sees the reason
-           in the same glance as the new number. -->
-      <script>
-        // Countdown to launch: Aug 12, 2026, 00:00 local time.
-        // Kept in its own block, directly under the markup it drives, so it
-        // starts the moment those four cells exist and can't be taken down by
-        // a failure anywhere else on the page.
-        (function(){
-          var els = {
-            days:  document.getElementById('cd-days'),
-            hours: document.getElementById('cd-hours'),
-            mins:  document.getElementById('cd-mins'),
-            secs:  document.getElementById('cd-secs')
-          };
-          if (!els.days || !els.hours || !els.mins || !els.secs) return;
-
-          // Numeric constructor rather than a parsed string: months are
-          // 0-indexed, so 7 is August. This is unambiguously local time in
-          // every engine, where the ISO string form is not.
-          var box = document.getElementById('countdown');
-          var sr  = document.getElementById('cd-sr');
-
-          var launch = new Date(2026, 7, 12, 0, 0, 0, 0).getTime();
-
-          function pad(n){ n = String(n); return n.length < 2 ? '0' + n : n; }
-
-          var timer = null;
-          function stop(){ if (timer){ clearTimeout(timer); timer = null; } }
-
-          // Chained timeout aligned to the next whole second, rather than
-          // setInterval(1000) counting from load. An interval drifts against
-          // the clock, and a drifting clock visibly repeats or skips a second.
-          function schedule(){
-            stop();
-            timer = setTimeout(tick, 1000 - (Date.now() % 1000) + 20);
-          }
-
-          function tick(){
-            var diff = launch - Date.now();
-            if (!(diff > 0)) diff = 0;          // also catches NaN
-
-            els.days.textContent  = pad(Math.floor(diff / 86400000));
-            els.hours.textContent = pad(Math.floor((diff % 86400000) / 3600000));
-            els.mins.textContent  = pad(Math.floor((diff % 3600000) / 60000));
-            els.secs.textContent  = pad(Math.floor((diff % 60000) / 1000));
-
-            // Past the launch moment, retire the clock instead of leaving four
-            // zeroes on screen for the rest of the app's life.
-            if (diff === 0){
-              if (box) box.classList.add('is-live');
-              if (sr)  sr.textContent = 'A+ Sunsets ابھی آ رہا ہے۔';
-              stop();
-              return;
-            }
-            schedule();
-          }
-
-          tick();
-
-          // Phones throttle or suspend timers in a backgrounded tab, which
-          // leaves the numbers frozen at whatever they read when the visitor
-          // looked away. Redraw the moment the page is in front again.
-          document.addEventListener('visibilitychange', function(){
-            if (!document.hidden) tick();
-          });
-          window.addEventListener('pageshow', tick);
-        })();
-      </script>
-
       <label for="email-input" class="signup-label sr-only">اپنی ای میل درج کریں</label>
       <form class="signup" id="signup" action="https://formspree.io/f/xvzezvpj" method="POST">
         <span class="signup-icon" aria-hidden="true">
@@ -1752,7 +1614,7 @@
       <div class="stores">
         <div class="stores-body">
           <div class="store-badges">
-            <a class="store-badge" href="download.html" aria-label="ایپ سٹور سے ڈاؤن لوڈ کریں، 12 اگست کو دستیاب">
+            <a class="store-badge" href="download.html" aria-label="ایپ سٹور سے ڈاؤن لوڈ کریں">
               <svg viewBox="0 0 135 40" role="img" aria-hidden="true">
                 <rect width="135" height="40" rx="6" fill="#000"/>
                 <rect x="0.5" y="0.5" width="134" height="39" rx="5.5" fill="none" stroke="#a6a6a6"/>
@@ -1761,7 +1623,7 @@
                 <text x="42" y="30" fill="#fff" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="500">App Store</text>
               </svg>
             </a>
-            <a class="store-badge" href="download.html" aria-label="گوگل پلے پر حاصل کریں، 12 اگست کو دستیاب">
+            <a class="store-badge" href="download.html" aria-label="گوگل پلے پر حاصل کریں">
               <svg viewBox="0 0 135 40" role="img" aria-hidden="true">
                 <rect width="135" height="40" rx="6" fill="#000"/>
                 <rect x="0.5" y="0.5" width="134" height="39" rx="5.5" fill="none" stroke="#a6a6a6"/>
@@ -1820,7 +1682,7 @@
 
 <section class="coaster" aria-labelledby="coaster-h">
  <div class="coaster-inner">
-  <span class="coaster-eyebrow">سواری<span class="dot" aria-hidden="true"></span>اگست 2026</span>
+  <span class="coaster-eyebrow">سواری</span>
   <h2 class="sr-only" id="coaster-h">یہ سواری کن چیزوں پر چلتی ہے</h2>
 
   <div class="coaster-track">
@@ -1861,7 +1723,7 @@
 
     <section class="footer-col" aria-labelledby="f-story">
       <h3 id="f-story">ہماری کہانی</h3>
-      <p>یہ 2022 میں دوستوں کے درمیان ایک مشترکہ البم سے شروع ہوا جو مختلف گلیوں سے ایک ہی غروبِ آفتاب کی تصاویر ایک دوسرے کو بھیجتے رہتے تھے۔ البم بہت بڑا ہو گیا، تو ہم نے اس سے بہتر کچھ بنایا۔ چار سال بعد یہ ایک ایپ ہے، جو 12 اگست 2026 کو لانچ ہو رہی ہے۔</p>
+      <p>یہ 2022 میں دوستوں کے درمیان ایک مشترکہ البم سے شروع ہوا جو مختلف گلیوں سے ایک ہی غروبِ آفتاب کی تصاویر ایک دوسرے کو بھیجتے رہتے تھے۔ البم بہت بڑا ہو گیا، تو ہم نے اس سے بہتر کچھ بنایا۔ چار سال بعد، یہ ایک ایپ ہے۔</p>
     </section>
   </div>
 
@@ -1913,7 +1775,6 @@
       کھلے گی، آپ کو ایک ای میل ملے گی، آپ کے ڈاؤن لوڈ لنک کے ساتھ۔ اس سے پہلے کچھ نہیں،
       اس کے بعد کچھ نہیں۔
     </p>
-    <p class="modal-meta">لانچ · 12 اگست 2026</p>
     <button type="button" class="modal-ok" id="modal-ok">آسمان کی طرف واپس</button>
   </div>
 </div>
@@ -1968,7 +1829,7 @@
 
   try {
     if (localStorage.getItem(STORAGE_KEY)) {
-      note.textContent = "آپ پہلے ہی فہرست میں شامل ہیں۔ 12 اگست کو ملتے ہیں 🌅";
+      note.textContent = "آپ پہلے ہی فہرست میں شامل ہیں۔ جلد ملتے ہیں 🌅";
     }
   } catch (e) { /* localStorage unavailable, non-fatal */ }
 
@@ -2232,7 +2093,7 @@
         headers: { "Accept": "application/json" }
       });
       if (!res.ok) throw new Error("Request failed");
-      note.textContent = "آپ فہرست میں شامل ہو گئے ہیں۔ 12 اگست کو ملتے ہیں 🌅";
+      note.textContent = "آپ فہرست میں شامل ہو گئے ہیں۔ جلد ملتے ہیں 🌅";
       try { localStorage.setItem(STORAGE_KEY, "1"); } catch (e) {}
       openModal(email);
       form.reset();
