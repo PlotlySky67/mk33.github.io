@@ -187,7 +187,6 @@
   .brand-name span{display:block; font-family:'Space Mono',monospace; font-weight:400; font-size:8px; letter-spacing:0.14em; color:var(--cream-dim); margin-top:1px;}
 
   .nav-menu-btn{
-    order:1;
     flex:0 0 auto;
     display:flex; align-items:center; justify-content:center;
     width:38px; height:34px;
@@ -288,7 +287,7 @@
      the menu around it is progressive enhancement, not a requirement.
      Gallery itself only exists in English so far, so every other language
      links to that language's homepage instead — the closest real page. */
-  .lang-switch{order:2; position:relative; flex:0 0 auto; margin-right:10px;}
+  .lang-switch{position:relative; flex:0 0 auto; margin-right:10px;}
   .lang-switch-btn{
     display:flex; align-items:center; justify-content:center;
     width:38px; height:34px;
@@ -346,7 +345,7 @@
      middle of the empty bar. */
   @media (max-width:640px){
     .nav-links{display:none;}
-    .lang-switch{order:2; margin-left:auto; margin-right:0;}
+    .lang-switch{margin-left:auto; margin-right:0;}
     .lang-switch-btn{width:30px; height:30px; font-size:14px;}
     .nav-menu-btn{width:30px; height:30px;}
     .nav-menu-btn svg{width:18px; height:11px;}
