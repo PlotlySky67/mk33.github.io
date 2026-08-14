@@ -794,43 +794,6 @@
      (claimed or hedged) sitting on the page. */
   .countdown.is-live{display:none;}
 
-  /* Launch-delay notice. Sits directly under the clock, same frosted-glass
-     card as the countdown cells so it reads as part of the same object
-     rather than a banner bolted on top. Left border in solar yellow because
-     it is an aside about the number above it, not a headline. */
-  .delay-note{
-    max-width:52ch;
-    border:1px solid rgba(255,255,255,0.3);
-    border-left:4px solid var(--hot);
-    border-radius:12px;
-    background:rgba(255,255,255,0.14);
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-    padding:9px 12px;
-    margin-top:calc(-1 * clamp(14px, 3vw, 20px));
-    margin-bottom:clamp(28px, 6vw, 40px);
-  }
-  .delay-note .delay-title{
-    display:block;
-    font-family:'Space Mono',monospace;
-    font-size:7.5px; letter-spacing:0.16em; text-transform:lowercase;
-    color:var(--hot);
-    margin-bottom:3px;
-  }
-  .delay-note p{
-    font-size:clamp(9.5px, 1.1vw, 10.5px);
-    line-height:1.32;
-    color:rgba(255,255,255,0.82);
-    text-align:left;
-    padding-left:0;
-  }
-  /* One sentence per row, stacked tight: blocks give each sentence its own
-     line, with no extra gap between them, so the whole note reads as one
-     continuous paragraph that happens to break at the full stops. */
-  .delay-note p > span{display:block;}
-  @media (max-width:420px){
-    .delay-note{padding:8px 10px;}
-  }
 
   /* signup form */
   /* Visible label, sitting outside the bordered row so it isn't pulled into
@@ -1113,7 +1076,7 @@
   /* Two spots use this word inside the hero's frosted-glass cards, sitting on
      the coral gradient itself — coral-on-coral would nearly vanish, so those
      instances get solar yellow instead of the shared gold/coral sweep. */
-  .delay-note .shine-word, #form-note .shine-word{
+  #form-note .shine-word{
     color:var(--hot);
     background-image:none;
     -webkit-text-fill-color:var(--hot);
@@ -1521,7 +1484,6 @@
        translucent-white background (the same one .stores uses and never
        had this override), so removing the color swap is the fix. */
     .countdown .unit,
-    .delay-note,
     .signup{
       backdrop-filter:none;
       -webkit-backdrop-filter:none;
@@ -1706,14 +1668,6 @@
       <!-- Launch moved from August 1 to August 12. Stated plainly, and placed
            under the clock so anyone who remembers the old date sees the reason
            in the same glance as the new number. -->
-      <aside class="delay-note">
-        <span class="delay-title">ملاحظة حول الموعد</span>
-        <p>
-          <span>تم تأجيل الإطلاق من 1 أغسطس إلى 12 أغسطس</span>
-          <span>واجهنا بعض الصعوبات في الحصول على تراخيص البرمجيات التي يعتمد عليها التطبيق، ونفضّل أن نقدّم لكم عملًا مكتملًا بدلًا من عمل متسرّع</span>
-          <span>شكرًا على <span class="shine-word">اهتمامكم</span>!</span>
-        </p>
-      </aside>
       <script>
         // Countdown to launch: Aug 12, 2026, 00:00 local time.
         // Kept in its own block, directly under the markup it drives, so it
