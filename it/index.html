@@ -507,7 +507,7 @@
   .nav-menu-btn{
     flex:0 0 auto;
     display:flex; align-items:center; justify-content:center;
-    width:46px; height:40px;
+    width:40px; height:40px;
     padding:0;
     /* A soft anthracite fill so the arc mark's own gold/coral/ember strokes
        (hardcoded on the <use> source, which CSS here can't repaint) stay
@@ -516,7 +516,7 @@
        it, not just another nav icon. */
     background:var(--anthracite);
     border:2px solid #FF3B30;
-    border-radius:12px;
+    border-radius:50%;
     box-shadow:0 6px 16px rgba(24,24,27,0.18);
     cursor:pointer;
     transition:background .15s ease, transform .12s ease, box-shadow .12s ease;
@@ -1220,7 +1220,7 @@
     .nav-links{display:none;}
     .lang-switch{margin-left:auto; margin-right:0;}
     .lang-switch-btn{width:30px; height:30px; font-size:14px;}
-    .nav-menu-btn{width:30px; height:30px;}
+    .nav-menu-btn{width:32px; height:32px;}
     .nav-menu-btn svg{width:18px; height:11px;}
   }
 
@@ -1410,7 +1410,7 @@
     }
     .nav-links{margin-left:8px;}
     .nav-links a{padding:6px 5px; font-size:9.5px; letter-spacing:0.05em;}
-    .nav-menu-btn{width:34px; height:32px;}
+    .nav-menu-btn{width:32px; height:32px;}
   }
   @media (max-width:380px){
     .footer-links-grid{grid-template-columns:minmax(0, 1fr);}
