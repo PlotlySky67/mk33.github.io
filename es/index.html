@@ -1398,10 +1398,22 @@
        width and ignored the status bar inset entirely. */
   }
   @media (max-width:420px){
-    .signup{flex-wrap:wrap;}
+    /* A smaller, uniform radius than the desktop pill: at full stadium
+       height it rounded the corners of the wrapped button row so hard
+       that the button's own edges poked past the outer border. */
+    .signup{flex-wrap:wrap; border-radius:26px;}
     /* The icon and the field share the first row; only the button wraps. */
     .signup input{flex:1 1 0; width:auto; min-width:0;}
-    .signup button{flex:0 0 100%; width:100%; padding:14px; border-left:none; border-top:2px solid var(--cream);}
+    /* Flush against the border rather than floating on an inset margin:
+       width:100% plus a margin always overflows its container by the
+       margin amount, which is exactly what pushed the button past the
+       edge. Losing its own border-radius is fine here — the parent's
+       overflow:hidden clips it to the container's own rounded corners. */
+    .signup button{
+      flex:0 0 100%; width:100%; margin:0; padding:14px;
+      border-left:none; border-top:2px solid var(--cream);
+      border-radius:0;
+    }
   }
   @media (max-width:440px){
     .brand-name{
