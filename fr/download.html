@@ -1254,6 +1254,22 @@
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     var WIPE_KEY = 'assunsets_wipe';
 
+    // Lift the curtain if we arrived through one. The flag is cleared first,
+    // so a plain reload afterwards starts clean. Without this, a page
+    // reached via the wipe would stay hidden under it forever — the
+    // pre-paint script above sets .is-on on load, but nothing here was
+    // clearing it back off again.
+    try{
+      if (sessionStorage.getItem(WIPE_KEY)){
+        sessionStorage.removeItem(WIPE_KEY);
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){ wipe.classList.remove('is-on'); });
+        });
+      }
+    }catch(e){}
+
+    // Coming back through history restores the page with the curtain still
+    // down, since the class was set before the browser cached it.
     window.addEventListener('pageshow', function(e){
       if (e.persisted) wipe.classList.remove('is-on');
     });
