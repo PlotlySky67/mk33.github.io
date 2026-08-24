@@ -196,29 +196,28 @@
   .brand.is-nudging{animation:brand-nudge .26s ease-in-out;}
 
   /* ---------- NAV LINKS ----------
-     Sit directly beside the mark, in the same mono voice as the other labels
-     on the page, so the pixel CTA stays the only loud thing in the bar. */
+     Four round icon buttons, one per page, always on screen (no hamburger
+     hand-off needed to reach them) so every destination is a single tap
+     regardless of viewport width. */
   .nav-links{
-    display:flex; align-items:center; gap:0;
+    display:flex; align-items:center; gap:8px;
     list-style:none;
-    margin-left:22px; margin-right:auto;
+    margin-left:14px; margin-right:auto;
   }
   .nav-links li{display:flex; align-items:center;}
-  .nav-links li + li::before{
-    content:"/";
-    font-family:'Space Mono',monospace; font-size:12px;
-    color:var(--line-strong);
-  }
   .nav-links a{
-    display:inline-flex; align-items:center;
-    font-family:'Space Mono',monospace;
-    font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+    display:inline-flex; align-items:center; justify-content:center;
+    width:38px; height:38px;
+    border-radius:50%;
+    background:rgba(24,24,27,0.05);
+    border:2px solid var(--line-strong);
     color:var(--cream-dim);
-    padding:8px 11px;
-    border-bottom:2px solid transparent;
-    transition:color .15s ease, border-color .15s ease;
-  }@media (hover:hover){ .nav-links a:hover{color:var(--cream); border-bottom-color:var(--gold);} }
-  .nav-links a[aria-current="page"]{color:var(--gold); border-bottom-color:var(--gold);}
+    transition:background .15s ease, border-color .15s ease, color .15s ease, transform .12s ease;
+  }
+  .nav-links a:active{transform:translateY(1px);}
+  .nav-links a .mi{width:17px; height:17px;}
+  @media (hover:hover){ .nav-links a:hover{background:rgba(24,24,27,0.1); border-color:var(--cream); color:var(--cream);} }
+  .nav-links a[aria-current="page"]{color:var(--gold); border-color:var(--gold); background:rgba(255,94,54,0.08);}
   .arc-mark{width:26px; height:15px; position:relative; flex:0 0 auto;}
   .arc-mark svg{width:100%; height:100%;}
   .brand-name{font-family:'Fraunces',serif; font-weight:600; font-size:13px; letter-spacing:0.03em; white-space:nowrap;}
@@ -394,8 +393,10 @@
      two buttons stay pinned to the right edge instead of drifting to the
      middle of the empty bar. */
   @media (max-width:640px){
-    .nav-links{display:none;}
-    .lang-switch{margin-left:auto; margin-right:0;}
+    .nav-links{gap:6px;}
+    .nav-links a{width:34px; height:34px;}
+    .nav-links a .mi{width:15px; height:15px;}
+    .lang-switch{margin-right:0;}
     .lang-switch-btn{width:30px; height:30px; font-size:14px;}
     .nav-menu-btn{width:32px; height:32px;}
     .nav-menu-btn svg{width:18px; height:11px;}
@@ -617,7 +618,6 @@
   @media (max-width:760px){
     .site-nav{padding:10px 5vw;}
     .nav-links{margin-left:12px;}
-    .nav-links a{padding:6px 7px; font-size:10px; letter-spacing:0.08em; min-height:40px;}
     .brand-name span{display:none;}
     .footer-panel{flex-direction:column; align-items:flex-start; gap:22px;}
     .footer-links-grid{gap:0 18px; padding:24px 0 4px;}
@@ -628,8 +628,9 @@
       position:absolute; width:1px; height:1px; padding:0; margin:-1px;
       overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
     }
-    .nav-links{margin-left:8px;}
-    .nav-links a{padding:6px 5px; font-size:9.5px; letter-spacing:0.05em;}
+    .nav-links{margin-left:8px; gap:5px;}
+    .nav-links a{width:30px; height:30px;}
+    .nav-links a .mi{width:14px; height:14px;}
     .nav-menu-btn{width:32px; height:32px;}
   }
   @media (max-width:380px){
@@ -670,10 +671,9 @@
       <div class="brand-name">A+ Sunsets<span>dal 2022</span></div>
     </a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="product.html" aria-current="page">Il nostro prodotto</a></li>
-      <li><a href="profile.html">Profilo</a></li>
-      <li><a href="download.html">Scarica l'app</a></li>
+      <li><a href="product.html" aria-current="page" aria-label="Il nostro prodotto"><svg class="mi" viewBox="0 0 20 20" aria-hidden="true"><use href="#i-layers"/></svg></a></li>
+      <li><a href="profile.html" aria-label="Profilo"><svg class="mi" viewBox="0 0 20 20" aria-hidden="true"><use href="#i-person"/></svg></a></li>
+      <li><a href="download.html" aria-label="Scarica l'app"><svg class="mi" viewBox="0 0 20 20" aria-hidden="true"><use href="#i-download"/></svg></a></li>
     </ul>
     <div class="lang-switch">
       <button type="button" class="lang-switch-btn" id="lang-switch-btn" aria-expanded="false" aria-controls="lang-switch-menu" aria-label="Altre lingue disponibili">
