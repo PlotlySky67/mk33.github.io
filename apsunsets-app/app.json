@@ -1,0 +1,50 @@
+{
+  "expo": {
+    "name": "A+ Sunsets",
+    "slug": "apsunsets-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "apsunsets",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#140B18",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.awesomesolutionssoftware.apsunsets",
+      "infoPlist": {
+        "NSCameraUsageDescription": "A+ Sunsets uses your camera to save a photo of the sunset you're looking at.",
+        "NSPhotoLibraryUsageDescription": "A+ Sunsets needs access to your photos so you can save a sunset from your library.",
+        "NSLocationWhenInUseUsageDescription": "A+ Sunsets tags each saved sunset with where you were, so your gallery is organized by place."
+      }
+    },
+    "android": {
+      "package": "com.awesomesolutionssoftware.apsunsets",
+      "adaptiveIcon": {
+        "backgroundColor": "#140B18",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-image",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "A+ Sunsets needs access to your photos so you can save a sunset from your library.",
+          "cameraPermission": "A+ Sunsets uses your camera to save a photo of the sunset you're looking at."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "A+ Sunsets tags each saved sunset with where you were, so your gallery is organized by place."
+        }
+      ]
+    ]
+  }
+}
