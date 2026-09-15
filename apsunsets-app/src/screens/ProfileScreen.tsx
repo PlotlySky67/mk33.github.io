@@ -1,5 +1,5 @@
-import { useCallback, useMemo, useState } from 'react';
-import { CompositeScreenProps, useFocusEffect } from '@react-navigation/native';
+import { useEffect, useMemo, useState } from 'react';
+import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Image } from 'expo-image';
@@ -7,7 +7,8 @@ import { Pressable, SectionList, StyleSheet, Text, View } from 'react-native';
 
 import { EmptyState } from '../components/EmptyState';
 import { colors, radius, spacing } from '../theme/colors';
-import { getAllSunsets, placeLabel } from '../storage/sunsetStore';
+import { useAuth } from '../contexts/AuthContext';
+import { placeLabel, subscribeToOwnSunsets } from '../firebase/sunsets';
 import { Sunset } from '../types/sunset';
 import { RootStackParamList, TabParamList } from '../../App';
 
@@ -35,74 +36,109 @@ function groupByPlace(sunsets: Sunset[]): Section[] {
 }
 
 export function ProfileScreen({ navigation }: Props) {
+  const { user, following, logOut } = useAuth();
   const [sunsets, setSunsets] = useState<Sunset[]>([]);
 
-  useFocusEffect(
-    useCallback(() => {
-      getAllSunsets().then(setSunsets);
-    }, [])
-  );
+  useEffect(() => {
+    if (!user) return;
+    return subscribeToOwnSunsets(user.uid, setSunsets);
+  }, [user]);
 
   const sections = useMemo(() => groupByPlace(sunsets), [sunsets]);
   const placeCount = sections.length;
 
-  if (sunsets.length === 0) {
-    return (
-      <View style={styles.container}>
-        <Header total={0} places={0} />
-        <EmptyState
-          title="Your profile is quiet, for now"
-          subtitle="Every sunset you save will be organized here, by place and date."
-          emoji="✨"
-        />
-      </View>
-    );
-  }
-
   return (
-    <SectionList
-      style={styles.container}
-      sections={sections}
-      keyExtractor={(item) => item.id}
-      ListHeaderComponent={<Header total={sunsets.length} places={placeCount} />}
-      stickySectionHeadersEnabled={false}
-      contentContainerStyle={styles.listContent}
-      renderSectionHeader={({ section }) => (
-        <Text style={styles.sectionTitle}>
-          {section.title} · {section.data.length}
-        </Text>
-      )}
-      renderItem={({ item }) => (
-        <Pressable
-          style={styles.row}
-          onPress={() => navigation.navigate('SunsetDetail', { id: item.id })}
-        >
-          <Image source={{ uri: item.photoUri }} style={styles.thumb} contentFit="cover" />
-          <View style={styles.rowText}>
-            <Text style={styles.rowDate}>
-              {new Date(item.capturedAt).toLocaleDateString(undefined, {
-                weekday: 'short',
-                month: 'short',
-                day: 'numeric',
-                year: 'numeric',
-              })}
+    <View style={styles.container}>
+      {sunsets.length === 0 ? (
+        <>
+          <Header
+            name={user?.displayName ?? 'You'}
+            total={0}
+            places={0}
+            friends={following.length}
+            onOpenFriends={() => navigation.navigate('Tabs', { screen: 'Friends' })}
+            onLogOut={logOut}
+          />
+          <EmptyState
+            title="Your profile is quiet, for now"
+            subtitle="Every sunset you save will be organized here, by place and date."
+            emoji="✨"
+          />
+        </>
+      ) : (
+        <SectionList
+          sections={sections}
+          keyExtractor={(item) => item.id}
+          ListHeaderComponent={
+            <Header
+              name={user?.displayName ?? 'You'}
+              total={sunsets.length}
+              places={placeCount}
+              friends={following.length}
+              onOpenFriends={() => navigation.navigate('Tabs', { screen: 'Friends' })}
+              onLogOut={logOut}
+            />
+          }
+          stickySectionHeadersEnabled={false}
+          contentContainerStyle={styles.listContent}
+          renderSectionHeader={({ section }) => (
+            <Text style={styles.sectionTitle}>
+              {section.title} · {section.data.length}
             </Text>
-          </View>
-        </Pressable>
+          )}
+          renderItem={({ item }) => (
+            <Pressable
+              style={styles.row}
+              onPress={() => navigation.navigate('SunsetDetail', { id: item.id })}
+            >
+              <Image source={{ uri: item.photoUrl }} style={styles.thumb} contentFit="cover" />
+              <View style={styles.rowText}>
+                <Text style={styles.rowDate}>
+                  {new Date(item.capturedAt).toLocaleDateString(undefined, {
+                    weekday: 'short',
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })}
+                </Text>
+              </View>
+            </Pressable>
+          )}
+        />
       )}
-    />
+    </View>
   );
 }
 
-function Header({ total, places }: { total: number; places: number }) {
+function Header({
+  name,
+  total,
+  places,
+  friends,
+  onOpenFriends,
+  onLogOut,
+}: {
+  name: string;
+  total: number;
+  places: number;
+  friends: number;
+  onOpenFriends: () => void;
+  onLogOut: () => void;
+}) {
   return (
     <View style={styles.header}>
-      <Text style={styles.eyebrow}>Your profile</Text>
+      <Text style={styles.eyebrow}>{name}</Text>
       <Text style={styles.title}>YOUR sky, saved.</Text>
       <View style={styles.statsRow}>
         <Stat value={total} label={total === 1 ? 'sunset' : 'sunsets'} />
         <Stat value={places} label={places === 1 ? 'place' : 'places'} />
+        <Pressable onPress={onOpenFriends}>
+          <Stat value={friends} label={friends === 1 ? 'friend' : 'friends'} />
+        </Pressable>
       </View>
+      <Pressable onPress={onLogOut}>
+        <Text style={styles.logOut}>Log out</Text>
+      </Pressable>
     </View>
   );
 }
@@ -161,6 +197,12 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     fontSize: 12,
     marginTop: 2,
+  },
+  logOut: {
+    color: colors.danger,
+    fontSize: 13,
+    fontWeight: '600',
+    marginTop: spacing.lg,
   },
   sectionTitle: {
     color: colors.text,

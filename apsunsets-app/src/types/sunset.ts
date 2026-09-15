@@ -7,7 +7,18 @@ export interface SunsetLocation {
 
 export interface Sunset {
   id: string;
-  photoUri: string;
+  ownerId: string;
+  ownerName: string;
+  photoUrl: string;
+  storagePath: string;
   capturedAt: string;
   location: SunsetLocation | null;
+}
+
+export interface UserProfile {
+  uid: string;
+  displayName: string;
+  displayNameLower: string;
+  email: string;
+  createdAt: string;
 }

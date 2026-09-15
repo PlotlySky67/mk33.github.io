@@ -1,11 +1,13 @@
-import { useCallback, useState } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
+import { useEffect, useState } from 'react';
+import { doc, onSnapshot } from 'firebase/firestore';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Image } from 'expo-image';
 import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { colors, radius, spacing } from '../theme/colors';
-import { deleteSunset, getSunsetById, placeLabel } from '../storage/sunsetStore';
+import { db } from '../firebase/config';
+import { deleteSunset, placeLabel } from '../firebase/sunsets';
+import { useAuth } from '../contexts/AuthContext';
 import { Sunset } from '../types/sunset';
 import { RootStackParamList } from '../../App';
 
@@ -13,15 +15,18 @@ type Props = NativeStackScreenProps<RootStackParamList, 'SunsetDetail'>;
 
 export function SunsetDetailScreen({ route, navigation }: Props) {
   const { id } = route.params;
+  const { user } = useAuth();
   const [sunset, setSunset] = useState<Sunset | null>(null);
 
-  useFocusEffect(
-    useCallback(() => {
-      getSunsetById(id).then((found) => setSunset(found ?? null));
-    }, [id])
-  );
+  useEffect(() => {
+    return onSnapshot(doc(db, 'sunsets', id), (snapshot) => {
+      setSunset(snapshot.exists() ? (snapshot.data() as Sunset) : null);
+    });
+  }, [id]);
 
   if (!sunset) return null;
+
+  const isOwner = sunset.ownerId === user?.uid;
 
   function confirmDelete() {
     Alert.alert('Delete this sky?', 'This sunset will be removed for good.', [
@@ -30,7 +35,8 @@ export function SunsetDetailScreen({ route, navigation }: Props) {
         text: 'Delete',
         style: 'destructive',
         onPress: async () => {
-          await deleteSunset(id);
+          if (!sunset) return;
+          await deleteSunset(sunset);
           navigation.goBack();
         },
       },
@@ -39,7 +45,7 @@ export function SunsetDetailScreen({ route, navigation }: Props) {
 
   return (
     <ScrollView style={styles.container}>
-      <Image source={{ uri: sunset.photoUri }} style={styles.image} contentFit="cover" />
+      <Image source={{ uri: sunset.photoUrl }} style={styles.image} contentFit="cover" />
       <View style={styles.body}>
         <Text style={styles.place}>{placeLabel(sunset.location)}</Text>
         <Text style={styles.date}>
@@ -50,10 +56,13 @@ export function SunsetDetailScreen({ route, navigation }: Props) {
             year: 'numeric',
           })}
         </Text>
+        {!isOwner && <Text style={styles.owner}>Saved by {sunset.ownerName}</Text>}
 
-        <Pressable style={styles.deleteButton} onPress={confirmDelete}>
-          <Text style={styles.deleteText}>Delete</Text>
-        </Pressable>
+        {isOwner && (
+          <Pressable style={styles.deleteButton} onPress={confirmDelete}>
+            <Text style={styles.deleteText}>Delete</Text>
+          </Pressable>
+        )}
       </View>
     </ScrollView>
   );
@@ -81,6 +90,11 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     fontSize: 14,
     marginTop: spacing.xs,
+  },
+  owner: {
+    color: colors.textMuted,
+    fontSize: 13,
+    marginTop: spacing.sm,
   },
   deleteButton: {
     marginTop: spacing.xl,

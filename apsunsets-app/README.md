@@ -3,24 +3,61 @@
 The app promised on [asunsets.com](https://asunsets.com): a personal, quiet
 gallery for the sunsets you actually save. Take or pick a photo, the app
 tags it with where you were, and it's organized automatically into your
-feed and your profile — nothing else in the frame.
+feed and your profile. Follow friends to see their skies too.
 
-Built with [Expo](https://expo.dev) (React Native + TypeScript). Everything
-is stored on-device (no backend, no accounts) — a deliberate MVP scope.
+Built with [Expo](https://expo.dev) (React Native + TypeScript) and
+[Firebase](https://firebase.google.com) (Auth, Firestore, Storage).
 
 ## Features
 
-- **Feed** — a two-column gallery of every sunset you've saved, newest first.
+- **Accounts** — sign up / log in with email & password.
+- **Feed** — a two-column gallery of your sunsets *and* the ones saved by
+  people you follow, newest first, updating live.
 - **Add** — take a photo or pick one from your library; the app detects your
   location in the background and lets you confirm/edit the city & country
-  before saving.
-- **Profile** — your sunsets grouped by place, with quick stats (total saved,
-  distinct places).
-- **Detail** — full photo, date, place, and delete.
+  before saving. Uploads straight to Firebase Storage.
+- **Friends** — search people by name, follow/unfollow them; their sunsets
+  then show up in your feed with their name on the card.
+- **Profile** — your own sunsets grouped by place, with quick stats (total
+  saved, distinct places, friends followed), and log out.
+- **Detail** — full photo, date, place, who saved it, and delete (owner only).
 
-Photos are copied into the app's private document storage and the index is
-kept in `AsyncStorage`, so entries persist across app restarts and don't
-depend on the original camera-roll asset still existing.
+## Firebase setup (required — do this first)
+
+The app won't run until it's pointed at a Firebase project.
+
+1. Go to [console.firebase.google.com](https://console.firebase.google.com) →
+   **Add project** (free "Spark" plan is enough to start).
+2. **Authentication** → Sign-in method → enable **Email/Password**.
+3. **Firestore Database** → Create database (start in **production mode**;
+   we provide rules below).
+4. **Storage** → Get started (same production-mode default).
+5. Project settings (⚙️ gear icon) → **General** → scroll to "Your apps" →
+   click the **Web** icon (`</>`) → register an app (nickname doesn't
+   matter, no need for Firebase Hosting) → copy the `firebaseConfig` values
+   shown.
+6. In `apsunsets-app/`, copy `.env.example` to `.env` and paste those values
+   in:
+   ```bash
+   cp .env.example .env
+   ```
+   ```
+   EXPO_PUBLIC_FIREBASE_API_KEY=...
+   EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN=...
+   EXPO_PUBLIC_FIREBASE_PROJECT_ID=...
+   EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET=...
+   EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=...
+   EXPO_PUBLIC_FIREBASE_APP_ID=...
+   ```
+7. **Security rules** — paste `firestore.rules` into Firestore → Rules, and
+   `storage.rules` into Storage → Rules (each file in this folder), then
+   **Publish**. Without these, every read/write is blocked by default.
+
+That's it — no server to run, no Firebase CLI required for local dev.
+
+> The first time a query (feed, search, profile) runs, Firestore may log an
+> error in the terminal with a link to auto-create a composite index. Click
+> it, wait ~1 minute, and retry — this only happens once per query shape.
 
 ## Run it locally
 
@@ -40,12 +77,17 @@ have Xcode / Android Studio installed.
 ## Project structure
 
 ```
-App.tsx                   navigation (bottom tabs + detail screen)
-src/screens/               Feed, Add, Profile, SunsetDetail
-src/components/            SunsetCard, EmptyState
-src/storage/sunsetStore.ts local persistence (AsyncStorage + FileSystem)
+App.tsx                    navigation (auth stack, tabs, detail screen)
+src/screens/                Login, SignUp, Feed, Add, Friends, Profile, SunsetDetail
+src/components/             SunsetCard, EmptyState
+src/contexts/AuthContext.tsx current user + following list, sign up/in/out
+src/firebase/config.ts      Firebase app/auth/Firestore/Storage init
+src/firebase/sunsets.ts     upload/query/delete sunsets
+src/firebase/users.ts       search users, follow/unfollow
 src/theme/colors.ts         shared sunset color palette
 assets/                     app icon & adaptive icon (generated placeholders)
+firestore.rules             Firestore security rules (paste into console)
+storage.rules               Storage security rules (paste into console)
 ```
 
 ## Publishing to the App Store
@@ -68,19 +110,26 @@ still need an [Apple Developer account](https://developer.apple.com/programs/)
    eas build:configure
    ```
 
-3. **Build for iOS:**
+3. **Set your Firebase env vars as EAS secrets** so production builds have
+   them too (they won't read your local `.env`):
+   ```bash
+   eas env:create --scope project --name EXPO_PUBLIC_FIREBASE_API_KEY --value "..." --visibility plaintext
+   ```
+   (repeat for each `EXPO_PUBLIC_FIREBASE_*` variable from `.env`)
+
+4. **Build for iOS:**
    ```bash
    eas build --platform ios
    ```
    The first run will walk you through Apple credentials (or let EAS manage
    signing certificates/provisioning profiles for you).
 
-4. **Submit to App Store Connect:**
+5. **Submit to App Store Connect:**
    ```bash
    eas submit --platform ios
    ```
 
-5. Finish the listing (screenshots, description, privacy nutrition labels)
+6. Finish the listing (screenshots, description, privacy nutrition labels)
    in [App Store Connect](https://appstoreconnect.apple.com), matching the
    copy already on the website ("Every sky, saved.").
 
@@ -90,8 +139,9 @@ matches the App ID registered in your Apple Developer account.
 
 ## Notes / next steps
 
-- No backend yet — sunsets live only on the device that saved them. A sync
-  layer (e.g. Supabase/Firebase) would be the natural next step if the app
-  needs multi-device or account support.
+- Friend search matches on the start of a name (case-insensitive). There's
+  no discovery/suggestions yet — you have to know the name to search it.
+- The feed does a Firestore `in` query capped at 30 people (you + who you
+  follow); fine for an MVP, would need pagination/fan-out at real scale.
 - The location flow degrades gracefully: if permission is denied, the
   sunset still saves, just without a place tag.

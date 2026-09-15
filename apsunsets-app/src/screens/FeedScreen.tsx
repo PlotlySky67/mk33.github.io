@@ -1,14 +1,15 @@
-import { useCallback, useState } from 'react';
-import { CompositeScreenProps, useFocusEffect } from '@react-navigation/native';
+import { useEffect, useState } from 'react';
+import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { EmptyState } from '../components/EmptyState';
 import { SunsetCard } from '../components/SunsetCard';
 import { colors, spacing } from '../theme/colors';
-import { getAllSunsets } from '../storage/sunsetStore';
+import { useAuth } from '../contexts/AuthContext';
+import { subscribeToFeed } from '../firebase/sunsets';
 import { Sunset } from '../types/sunset';
 import { RootStackParamList, TabParamList } from '../../App';
 
@@ -18,20 +19,23 @@ type Props = CompositeScreenProps<
 >;
 
 export function FeedScreen({ navigation }: Props) {
+  const { user, following } = useAuth();
   const [sunsets, setSunsets] = useState<Sunset[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const load = useCallback(async () => {
-    const all = await getAllSunsets();
-    setSunsets(all);
-    setLoading(false);
-  }, []);
+  const followingIds = following.map((f) => f.uid).sort().join(',');
 
-  useFocusEffect(
-    useCallback(() => {
-      load();
-    }, [load])
-  );
+  useEffect(() => {
+    if (!user) return;
+    setLoading(true);
+    const ownerIds = [user.uid, ...following.map((f) => f.uid)];
+    const unsubscribe = subscribeToFeed(ownerIds, (result) => {
+      setSunsets(result);
+      setLoading(false);
+    });
+    return unsubscribe;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, followingIds]);
 
   return (
     <View style={styles.container}>
@@ -44,7 +48,7 @@ export function FeedScreen({ navigation }: Props) {
       {!loading && sunsets.length === 0 ? (
         <EmptyState
           title="Nothing saved yet"
-          subtitle="Catch a sunset? Tap Add and keep it here instead of losing it in your camera roll."
+          subtitle="Catch a sunset, or follow a friend, and their sky will show up here."
         />
       ) : (
         <FlatList
@@ -53,9 +57,12 @@ export function FeedScreen({ navigation }: Props) {
           numColumns={2}
           contentContainerStyle={styles.grid}
           columnWrapperStyle={styles.row}
-          refreshControl={<RefreshControl refreshing={false} onRefresh={load} tintColor={colors.accent} />}
           renderItem={({ item }) => (
-            <SunsetCard sunset={item} onPress={() => navigation.navigate('SunsetDetail', { id: item.id })} />
+            <SunsetCard
+              sunset={item}
+              showOwner={item.ownerId !== user?.uid}
+              onPress={() => navigation.navigate('SunsetDetail', { id: item.id })}
+            />
           )}
         />
       )}

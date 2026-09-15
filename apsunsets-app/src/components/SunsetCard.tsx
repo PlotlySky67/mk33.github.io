@@ -3,17 +3,32 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { colors, radius, spacing } from '../theme/colors';
 import { Sunset } from '../types/sunset';
-import { placeLabel } from '../storage/sunsetStore';
+import { placeLabel } from '../firebase/sunsets';
 
 function formatDate(iso: string): string {
   const date = new Date(iso);
   return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
 }
 
-export function SunsetCard({ sunset, onPress }: { sunset: Sunset; onPress: () => void }) {
+export function SunsetCard({
+  sunset,
+  onPress,
+  showOwner = false,
+}: {
+  sunset: Sunset;
+  onPress: () => void;
+  showOwner?: boolean;
+}) {
   return (
     <Pressable style={styles.card} onPress={onPress}>
-      <Image source={{ uri: sunset.photoUri }} style={styles.image} contentFit="cover" transition={150} />
+      <Image source={{ uri: sunset.photoUrl }} style={styles.image} contentFit="cover" transition={150} />
+      {showOwner && (
+        <View style={styles.ownerBadge}>
+          <Text style={styles.ownerText} numberOfLines={1}>
+            {sunset.ownerName}
+          </Text>
+        </View>
+      )}
       <View style={styles.overlay}>
         <Text style={styles.place} numberOfLines={1}>
           {placeLabel(sunset.location)}
@@ -34,6 +49,20 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
+  },
+  ownerBadge: {
+    position: 'absolute',
+    top: spacing.sm,
+    left: spacing.sm,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 3,
+    borderRadius: radius.pill,
+    backgroundColor: 'rgba(20, 11, 24, 0.65)',
+  },
+  ownerText: {
+    color: colors.text,
+    fontSize: 11,
+    fontWeight: '700',
   },
   overlay: {
     position: 'absolute',

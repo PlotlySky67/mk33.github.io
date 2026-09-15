@@ -17,7 +17,8 @@ import {
 } from 'react-native';
 
 import { colors, radius, spacing } from '../theme/colors';
-import { saveSunset } from '../storage/sunsetStore';
+import { useAuth } from '../contexts/AuthContext';
+import { uploadSunset } from '../firebase/sunsets';
 import { SunsetLocation } from '../types/sunset';
 import { RootStackParamList, TabParamList } from '../../App';
 
@@ -27,6 +28,7 @@ type Props = CompositeScreenProps<
 >;
 
 export function AddSunsetScreen({ navigation }: Props) {
+  const { user } = useAuth();
   const [pickedUri, setPickedUri] = useState<string | null>(null);
   const [place, setPlace] = useState('');
   const [country, setCountry] = useState('');
@@ -89,7 +91,7 @@ export function AddSunsetScreen({ navigation }: Props) {
   }
 
   async function handleSave() {
-    if (!pickedUri) return;
+    if (!pickedUri || !user) return;
     setSaving(true);
     try {
       const location: SunsetLocation | null = coords
@@ -101,7 +103,12 @@ export function AddSunsetScreen({ navigation }: Props) {
           }
         : null;
 
-      await saveSunset({ pickedUri, location });
+      await uploadSunset({
+        uid: user.uid,
+        ownerName: user.displayName ?? 'Someone',
+        pickedUri,
+        location,
+      });
       reset();
       navigation.navigate('Tabs', { screen: 'Feed' });
     } catch (error) {
