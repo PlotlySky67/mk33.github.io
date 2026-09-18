@@ -10,7 +10,6 @@ export interface Sunset {
   ownerId: string;
   ownerName: string;
   photoUrl: string;
-  storagePath: string;
   capturedAt: string;
   location: SunsetLocation | null;
 }
