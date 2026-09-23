@@ -1199,11 +1199,30 @@
   // countries/regions — not needed at this scale.
   (function(){
     var SUNSET_DB = [
-      { country:'Greece',   flag:'🇬🇷', place:'Santorini',        uploader:'elena_k',     gradient:'linear-gradient(160deg,#FFD166 0%,#FF5E36 100%)' },
-      { country:'Maldives', flag:'🇲🇻', place:'North Malé Atoll', uploader:'oceanviews',  gradient:'linear-gradient(160deg,#FF8A5B 0%,#FF5E36 100%)' },
-      { country:'Japan',    flag:'🇯🇵', place:'Mount Fuji',       uploader:'kenji.sora',  gradient:'linear-gradient(160deg,#FFD166 0%,#FF8A5B 100%)' },
-      { country:'Brazil',   flag:'🇧🇷', place:'Copacabana',       uploader:'luiza.rio',   gradient:'linear-gradient(160deg,#FF5E36 0%,#18181B 100%)' },
-      { country:'Morocco',  flag:'🇲🇦', place:'Sahara Desert',    uploader:'amina.dunes', gradient:'linear-gradient(160deg,#FFD166 0%,#FF5E36 100%)' }
+      { country:'Greece',       flag:'🇬🇷', place:'Santorini',            uploader:'elena_k',        gradient:'linear-gradient(160deg,#FFD166 0%,#FF5E36 100%)' },
+      { country:'Maldives',     flag:'🇲🇻', place:'North Malé Atoll',     uploader:'oceanviews',     gradient:'linear-gradient(160deg,#FF8A5B 0%,#FF5E36 100%)' },
+      { country:'Japan',        flag:'🇯🇵', place:'Mount Fuji',           uploader:'kenji.sora',     gradient:'linear-gradient(160deg,#FFD166 0%,#FF8A5B 100%)' },
+      { country:'Brazil',       flag:'🇧🇷', place:'Copacabana',           uploader:'luiza.rio',      gradient:'linear-gradient(160deg,#FF5E36 0%,#18181B 100%)' },
+      { country:'Morocco',      flag:'🇲🇦', place:'Sahara Desert',        uploader:'amina.dunes',    gradient:'linear-gradient(160deg,#FFD166 0%,#FF5E36 100%)' },
+      { country:'Italy',        flag:'🇮🇹', place:'Amalfi Coast',         uploader:'marco.ama',      gradient:'linear-gradient(160deg,#FFD166 0%,#18181B 100%)' },
+      { country:'Portugal',     flag:'🇵🇹', place:'Praia da Marinha',     uploader:'joana.mar',      gradient:'linear-gradient(200deg,#FF8A5B 0%,#18181B 100%)' },
+      { country:'Iceland',      flag:'🇮🇸', place:'Vík Black Sand Beach', uploader:'erik.nord',      gradient:'linear-gradient(160deg,#FF8A5B 0%,#FF5E36 100%)' },
+      { country:'Thailand',     flag:'🇹🇭', place:'Railay Beach',         uploader:'nok.andaman',    gradient:'linear-gradient(160deg,#FFD166 0%,#FF8A5B 100%)' },
+      { country:'Australia',    flag:'🇦🇺', place:'Uluru',                uploader:'jess.outback',   gradient:'linear-gradient(160deg,#FF5E36 0%,#18181B 100%)' },
+      { country:'USA',          flag:'🇺🇸', place:'Big Sur',              uploader:'cole.pch',       gradient:'linear-gradient(160deg,#FFD166 0%,#FF5E36 100%)' },
+      { country:'Mexico',       flag:'🇲🇽', place:'Tulum',                uploader:'sofia.tulum',    gradient:'linear-gradient(200deg,#FF8A5B 0%,#18181B 100%)' },
+      { country:'Indonesia',    flag:'🇮🇩', place:'Uluwatu, Bali',        uploader:'putu.bali',      gradient:'linear-gradient(160deg,#FFD166 0%,#18181B 100%)' },
+      { country:'India',        flag:'🇮🇳', place:'Varkala Cliff',        uploader:'arjun.kerala',   gradient:'linear-gradient(160deg,#FF8A5B 0%,#FF5E36 100%)' },
+      { country:'Turkey',       flag:'🇹🇷', place:'Cappadocia',           uploader:'deniz.balloon',  gradient:'linear-gradient(160deg,#FFD166 0%,#FF8A5B 100%)' },
+      { country:'South Africa', flag:'🇿🇦', place:'Table Mountain',       uploader:'thandi.cape',    gradient:'linear-gradient(160deg,#FF5E36 0%,#18181B 100%)' },
+      { country:'Spain',        flag:'🇪🇸', place:'Ibiza',                uploader:'pau.ibiza',      gradient:'linear-gradient(160deg,#FFD166 0%,#FF5E36 100%)' },
+      { country:'France',       flag:'🇫🇷', place:'Étretat',              uploader:'camille.norm',   gradient:'linear-gradient(200deg,#FF8A5B 0%,#18181B 100%)' },
+      { country:'New Zealand',  flag:'🇳🇿', place:'Lake Tekapo',          uploader:'liam.southisl',  gradient:'linear-gradient(160deg,#FFD166 0%,#18181B 100%)' },
+      { country:'Egypt',        flag:'🇪🇬', place:'Dahab',                uploader:'youssef.reds',   gradient:'linear-gradient(160deg,#FF8A5B 0%,#FF5E36 100%)' },
+      { country:'Norway',       flag:'🇳🇴', place:'Lofoten Islands',      uploader:'sigrid.arctic',  gradient:'linear-gradient(160deg,#FFD166 0%,#FF8A5B 100%)' },
+      { country:'Vietnam',      flag:'🇻🇳', place:'Ha Long Bay',          uploader:'linh.halong',    gradient:'linear-gradient(160deg,#FF5E36 0%,#18181B 100%)' },
+      { country:'Peru',         flag:'🇵🇪', place:'Machu Picchu',         uploader:'mateo.andes',    gradient:'linear-gradient(160deg,#FFD166 0%,#FF5E36 100%)' },
+      { country:'Kenya',        flag:'🇰🇪', place:'Maasai Mara',          uploader:'amani.savanna',  gradient:'linear-gradient(200deg,#FF8A5B 0%,#18181B 100%)' }
     ];
 
     // O(n): one pass, one lower-cased comparison per entry, stop at the
@@ -1216,6 +1235,19 @@
         if (SUNSET_DB[i].country.toLowerCase() === target) return SUNSET_DB[i];
       }
       return null;
+    }
+
+    // Drawn straight from SUNSET_DB rather than hand-typed, so the "try
+    // these" hint can never drift out of sync with what's actually in the
+    // list — a fresh random 5 every time the "not found" state renders.
+    function sampleSuggestions(){
+      var pool = SUNSET_DB.slice();
+      for (var i = pool.length - 1; i > 0; i--){
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = pool[i]; pool[i] = pool[j]; pool[j] = tmp;
+      }
+      var names = pool.slice(0, 5).map(function(entry){ return entry.country; });
+      return names.slice(0, -1).join(', ') + ' or ' + names[names.length - 1];
     }
 
     // Populate the select from the same array, so it can never drift out
@@ -1294,7 +1326,7 @@
         resultBody.textContent = query
           ? 'Nobody has shared a sunset from "' + query + '" yet. The gallery grows with every submission after launch.'
           : 'Pick a country from the list, or type one in, to look one up.';
-        resultMeta.textContent = 'Try Greece, Maldives, Japan, Brazil or Morocco';
+        resultMeta.textContent = 'Try ' + sampleSuggestions();
       }
       openModal();
     }
