@@ -20,6 +20,8 @@ for photo hosting.
   before saving. Uploads straight to Cloudinary.
 - **Friends** — search people by name, follow/unfollow them; their sunsets
   then show up in your feed with their name on the card.
+- **Messages** — a conversation list plus direct chat with anyone you follow,
+  updating live (Firestore-backed, no polling).
 - **Profile** — your own sunsets grouped by place, with quick stats (total
   saved, distinct places, friends followed), and log out.
 - **Detail** — full photo, date, place, who saved it, and delete (owner only).
@@ -101,13 +103,14 @@ have Xcode / Android Studio installed.
 ## Project structure
 
 ```
-App.tsx                    navigation (auth stack, tabs, detail screen)
-src/screens/                Login, SignUp, Feed, Add, Friends, Profile, SunsetDetail
-src/components/             SunsetCard, EmptyState
+App.tsx                    navigation (auth stack, tabs, detail/chat screens)
+src/screens/                Login, SignUp, Feed, Add, Friends, Messages, Chat, Profile, SunsetDetail
+src/components/             SunsetCard, EmptyState, Avatar
 src/contexts/AuthContext.tsx current user + following list, sign up/in/out
 src/firebase/config.ts      Firebase app/auth/Firestore init
 src/firebase/sunsets.ts     upload/query/delete sunsets
 src/firebase/users.ts       search users, follow/unfollow
+src/firebase/messages.ts    conversations + chat messages
 src/cloudinary/upload.ts    uploads a picked photo to Cloudinary
 src/theme/colors.ts         shared sunset color palette
 assets/                     app icon & adaptive icon (generated placeholders)

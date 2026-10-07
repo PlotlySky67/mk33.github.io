@@ -5,9 +5,11 @@ import { StatusBar } from 'expo-status-bar';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 
 import { AddSunsetScreen } from './src/screens/AddSunsetScreen';
+import { ChatScreen } from './src/screens/ChatScreen';
 import { FeedScreen } from './src/screens/FeedScreen';
 import { FriendsScreen } from './src/screens/FriendsScreen';
 import { LoginScreen } from './src/screens/LoginScreen';
+import { MessagesScreen } from './src/screens/MessagesScreen';
 import { ProfileScreen } from './src/screens/ProfileScreen';
 import { SignUpScreen } from './src/screens/SignUpScreen';
 import { SunsetDetailScreen } from './src/screens/SunsetDetailScreen';
@@ -18,6 +20,7 @@ export type TabParamList = {
   Feed: undefined;
   Add: undefined;
   Friends: undefined;
+  Messages: undefined;
   Profile: undefined;
 };
 
@@ -29,6 +32,7 @@ export type AuthStackParamList = {
 export type RootStackParamList = {
   Tabs: NavigatorScreenParams<TabParamList> | undefined;
   SunsetDetail: { id: string };
+  Chat: { otherUid: string; otherName: string };
 };
 
 const Tab = createBottomTabNavigator<TabParamList>();
@@ -39,6 +43,7 @@ const TAB_ICONS: Record<keyof TabParamList, string> = {
   Feed: '🌇',
   Add: '➕',
   Friends: '🧑‍🤝‍🧑',
+  Messages: '💬',
   Profile: '✨',
 };
 
@@ -56,6 +61,7 @@ function Tabs() {
       <Tab.Screen name="Feed" component={FeedScreen} />
       <Tab.Screen name="Add" component={AddSunsetScreen} options={{ title: 'Save a sky' }} />
       <Tab.Screen name="Friends" component={FriendsScreen} />
+      <Tab.Screen name="Messages" component={MessagesScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
@@ -110,6 +116,11 @@ function RootNavigator() {
         name="SunsetDetail"
         component={SunsetDetailScreen}
         options={{ headerShown: true, title: '', headerStyle: { backgroundColor: colors.bg }, headerTintColor: colors.text }}
+      />
+      <Stack.Screen
+        name="Chat"
+        component={ChatScreen}
+        options={{ headerShown: true, headerStyle: { backgroundColor: colors.bg }, headerTintColor: colors.text }}
       />
     </Stack.Navigator>
   );
