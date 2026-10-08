@@ -1,8 +1,9 @@
+import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer, NavigatorScreenParams } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
 import { AddSunsetScreen } from './src/screens/AddSunsetScreen';
 import { ChatScreen } from './src/screens/ChatScreen';
@@ -39,12 +40,12 @@ const Tab = createBottomTabNavigator<TabParamList>();
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const AuthStack = createNativeStackNavigator<AuthStackParamList>();
 
-const TAB_ICONS: Record<keyof TabParamList, string> = {
-  Feed: '🌇',
-  Add: '➕',
-  Friends: '🧑‍🤝‍🧑',
-  Messages: '💬',
-  Profile: '✨',
+const TAB_ICONS: Record<keyof TabParamList, { outline: keyof typeof Ionicons.glyphMap; filled: keyof typeof Ionicons.glyphMap }> = {
+  Feed: { outline: 'home-outline', filled: 'home' },
+  Add: { outline: 'add-circle-outline', filled: 'add-circle' },
+  Friends: { outline: 'people-outline', filled: 'people' },
+  Messages: { outline: 'paper-plane-outline', filled: 'paper-plane' },
+  Profile: { outline: 'person-circle-outline', filled: 'person-circle' },
 };
 
 function Tabs() {
@@ -52,10 +53,14 @@ function Tabs() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarActiveTintColor: colors.accent,
-        tabBarInactiveTintColor: colors.textFaint,
+        tabBarActiveTintColor: colors.text,
+        tabBarInactiveTintColor: colors.textMuted,
         tabBarStyle: styles.tabBar,
-        tabBarIcon: () => <Text style={styles.tabIcon}>{TAB_ICONS[route.name as keyof TabParamList]}</Text>,
+        tabBarShowLabel: false,
+        tabBarIcon: ({ focused, color, size }) => {
+          const icon = TAB_ICONS[route.name as keyof TabParamList];
+          return <Ionicons name={focused ? icon.filled : icon.outline} size={size} color={color} />;
+        },
       })}
     >
       <Tab.Screen name="Feed" component={FeedScreen} />
@@ -77,7 +82,7 @@ function AuthNavigator() {
 }
 
 const navigationTheme = {
-  dark: true,
+  dark: false,
   colors: {
     primary: colors.accent,
     background: colors.bg,
@@ -131,7 +136,7 @@ export default function App() {
     <AuthProvider>
       <NavigationContainer theme={navigationTheme}>
         <RootNavigator />
-        <StatusBar style="light" />
+        <StatusBar style="dark" />
       </NavigationContainer>
     </AuthProvider>
   );
@@ -139,11 +144,8 @@ export default function App() {
 
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: colors.surface,
+    backgroundColor: colors.bg,
     borderTopColor: colors.border,
-  },
-  tabIcon: {
-    fontSize: 20,
   },
   loadingScreen: {
     flex: 1,

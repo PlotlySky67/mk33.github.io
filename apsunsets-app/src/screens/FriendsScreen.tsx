@@ -92,7 +92,7 @@ export function FriendsScreen() {
         <>
           <Text style={styles.sectionTitle}>Following ({following.length})</Text>
           {following.length === 0 ? (
-            <EmptyState title="No friends yet" subtitle="Search by name above to follow someone's sky." emoji="🧑‍🤝‍🧑" />
+            <EmptyState title="No friends yet" subtitle="Search by name above to follow someone's sky." icon="people-outline" />
           ) : (
             <FlatList
               data={following}
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
   },
   followText: {
-    color: colors.bg,
+    color: colors.onAccent,
     fontSize: 13,
     fontWeight: '700',
   },

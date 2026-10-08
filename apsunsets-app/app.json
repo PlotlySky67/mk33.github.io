@@ -6,8 +6,8 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "scheme": "apsunsets",
-    "userInterfaceStyle": "dark",
-    "backgroundColor": "#140B18",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#FFFFFF",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.awesomesolutionssoftware.apsunsets",

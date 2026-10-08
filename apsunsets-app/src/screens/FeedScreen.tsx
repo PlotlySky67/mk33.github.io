@@ -3,7 +3,6 @@ import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 
 import { EmptyState } from '../components/EmptyState';
 import { SunsetCard } from '../components/SunsetCard';
@@ -39,11 +38,9 @@ export function FeedScreen({ navigation }: Props) {
 
   return (
     <View style={styles.container}>
-      <LinearGradient colors={['#3A1F3D', colors.bg]} style={styles.header}>
-        <Text style={styles.eyebrow}>🌅 A+ Sunsets</Text>
-        <Text style={styles.title}>Every sky, saved.</Text>
-        <Text style={styles.subtitle}>A quiet shelf for the skies you actually love.</Text>
-      </LinearGradient>
+      <View style={styles.header}>
+        <Text style={styles.wordmark}>A+ Sunsets</Text>
+      </View>
 
       {!loading && sunsets.length === 0 ? (
         <EmptyState
@@ -76,25 +73,16 @@ const styles = StyleSheet.create({
     backgroundColor: colors.bg,
   },
   header: {
-    paddingTop: spacing.xl,
+    paddingTop: spacing.md,
     paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.lg,
+    paddingBottom: spacing.sm,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
   },
-  eyebrow: {
-    color: colors.textMuted,
-    fontSize: 13,
-    fontWeight: '600',
-    marginBottom: spacing.sm,
-  },
-  title: {
+  wordmark: {
     color: colors.text,
-    fontSize: 28,
+    fontSize: 22,
     fontWeight: '800',
-  },
-  subtitle: {
-    color: colors.textMuted,
-    fontSize: 14,
-    marginTop: spacing.xs,
   },
   grid: {
     padding: spacing.md,

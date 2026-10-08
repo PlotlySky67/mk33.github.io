@@ -1,17 +1,16 @@
 export const colors = {
-  bg: '#140B18',
-  surface: '#1F1522',
-  surfaceAlt: '#2A1C2E',
-  border: 'rgba(248, 239, 231, 0.10)',
-  text: '#F8EFE7',
-  textMuted: 'rgba(248, 239, 231, 0.62)',
-  textFaint: 'rgba(248, 239, 231, 0.38)',
-  accent: '#FF7E5F',
-  accentSoft: 'rgba(255, 126, 95, 0.16)',
-  danger: '#FF6B6B',
+  bg: '#FFFFFF',
+  surface: '#FAFAFA',
+  surfaceAlt: '#EFEFEF',
+  border: '#DBDBDB',
+  text: '#262626',
+  textMuted: '#8E8E8E',
+  textFaint: '#C7C7C7',
+  accent: '#0095F6',
+  accentSoft: 'rgba(0, 149, 246, 0.10)',
+  danger: '#ED4956',
+  onAccent: '#FFFFFF',
 } as const;
-
-export const gradient = ['#FF9966', '#FF5E62', '#6A3093'] as const;
 
 export const spacing = {
   xs: 4,

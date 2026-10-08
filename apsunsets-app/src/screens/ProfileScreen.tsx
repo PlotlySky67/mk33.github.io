@@ -62,7 +62,7 @@ export function ProfileScreen({ navigation }: Props) {
           <EmptyState
             title="Your profile is quiet, for now"
             subtitle="Every sunset you save will be organized here, by place and date."
-            emoji="✨"
+            icon="images-outline"
           />
         </>
       ) : (

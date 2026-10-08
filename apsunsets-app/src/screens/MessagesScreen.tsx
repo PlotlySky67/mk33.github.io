@@ -77,7 +77,7 @@ export function MessagesScreen({ navigation }: Props) {
         <EmptyState
           title="Nicio conversație încă"
           subtitle="Urmărește un prieten din tab-ul Friends ca să poți începe o conversație cu el."
-          emoji="💬"
+          icon="paper-plane-outline"
         />
       </View>
     );
@@ -115,7 +115,6 @@ export function MessagesScreen({ navigation }: Props) {
 function Header() {
   return (
     <View style={styles.header}>
-      <Text style={styles.eyebrow}>💬</Text>
       <Text style={styles.title}>Mesaje</Text>
     </View>
   );
@@ -127,13 +126,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.bg,
   },
   header: {
-    paddingTop: spacing.xl,
+    paddingTop: spacing.md,
     paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.md,
-  },
-  eyebrow: {
-    fontSize: 24,
-    marginBottom: spacing.xs,
+    paddingBottom: spacing.sm,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
   },
   title: {
     color: colors.text,

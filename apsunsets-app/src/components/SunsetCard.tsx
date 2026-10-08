@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(20, 11, 24, 0.65)',
   },
   ownerText: {
-    color: colors.text,
+    color: colors.onAccent,
     fontSize: 11,
     fontWeight: '700',
   },
@@ -74,12 +74,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(20, 11, 24, 0.55)',
   },
   place: {
-    color: colors.text,
+    color: colors.onAccent,
     fontSize: 13,
     fontWeight: '600',
   },
   date: {
-    color: colors.textMuted,
+    color: 'rgba(255, 255, 255, 0.8)',
     fontSize: 11,
     marginTop: 2,
   },

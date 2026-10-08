@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   bubbleTextMine: {
-    color: colors.bg,
+    color: colors.onAccent,
   },
   bubbleTime: {
     color: colors.textFaint,
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.sm + 2,
   },
   sendText: {
-    color: colors.bg,
+    color: colors.onAccent,
     fontSize: 14,
     fontWeight: '700',
   },

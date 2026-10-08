@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Ionicons } from '@expo/vector-icons';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -121,7 +122,7 @@ export function AddSunsetScreen({ navigation }: Props) {
   if (!pickedUri) {
     return (
       <View style={styles.pickContainer}>
-        <Text style={styles.pickEmoji}>🌇</Text>
+        <Ionicons name="camera-outline" size={48} color={colors.accent} style={styles.pickIcon} />
         <Text style={styles.pickTitle}>Caught one?</Text>
         <Text style={styles.pickSubtitle}>Save this sky before it fades.</Text>
 
@@ -140,7 +141,10 @@ export function AddSunsetScreen({ navigation }: Props) {
       <Image source={{ uri: pickedUri }} style={styles.preview} contentFit="cover" />
 
       <View style={styles.field}>
-        <Text style={styles.label}>📍 Where were you?</Text>
+        <View style={styles.labelRow}>
+          <Ionicons name="location-outline" size={16} color={colors.text} />
+          <Text style={styles.label}>Where were you?</Text>
+        </View>
         {locating ? (
           <View style={styles.locatingRow}>
             <ActivityIndicator color={colors.accent} size="small" />
@@ -172,7 +176,7 @@ export function AddSunsetScreen({ navigation }: Props) {
       </View>
 
       <Pressable style={styles.primaryButton} onPress={handleSave} disabled={saving}>
-        {saving ? <ActivityIndicator color={colors.bg} /> : <Text style={styles.primaryButtonText}>Save to my sky</Text>}
+        {saving ? <ActivityIndicator color={colors.onAccent} /> : <Text style={styles.primaryButtonText}>Save to my sky</Text>}
       </Pressable>
       <Pressable style={styles.secondaryButton} onPress={reset} disabled={saving}>
         <Text style={styles.secondaryButtonText}>Start over</Text>
@@ -189,8 +193,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: spacing.xl,
   },
-  pickEmoji: {
-    fontSize: 48,
+  pickIcon: {
     marginBottom: spacing.md,
   },
   pickTitle: {
@@ -220,11 +223,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     marginTop: spacing.lg,
   },
+  labelRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs,
+    marginBottom: spacing.sm,
+  },
   label: {
     color: colors.text,
     fontSize: 15,
     fontWeight: '700',
-    marginBottom: spacing.sm,
   },
   input: {
     backgroundColor: colors.surface,
@@ -260,7 +268,7 @@ const styles = StyleSheet.create({
     marginTop: spacing.xl,
   },
   primaryButtonText: {
-    color: colors.bg,
+    color: colors.onAccent,
     fontSize: 16,
     fontWeight: '800',
   },

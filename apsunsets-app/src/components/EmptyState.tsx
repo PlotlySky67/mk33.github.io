@@ -1,11 +1,20 @@
+import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { colors, spacing } from '../theme/colors';
 
-export function EmptyState({ title, subtitle, emoji = '🌅' }: { title: string; subtitle: string; emoji?: string }) {
+export function EmptyState({
+  title,
+  subtitle,
+  icon = 'image-outline',
+}: {
+  title: string;
+  subtitle: string;
+  icon?: keyof typeof Ionicons.glyphMap;
+}) {
   return (
     <View style={styles.container}>
-      <Text style={styles.emoji}>{emoji}</Text>
+      <Ionicons name={icon} size={44} color={colors.textFaint} style={styles.icon} />
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.subtitle}>{subtitle}</Text>
     </View>
@@ -20,8 +29,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.xl,
     paddingTop: spacing.xl * 2,
   },
-  emoji: {
-    fontSize: 44,
+  icon: {
     marginBottom: spacing.md,
   },
   title: {

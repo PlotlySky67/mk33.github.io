@@ -41,7 +41,7 @@ export function LoginScreen({ navigation }: Props) {
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
-      <Text style={styles.eyebrow}>🌅 A+ Sunsets</Text>
+      <Text style={styles.eyebrow}>A+ Sunsets</Text>
       <Text style={styles.title}>Welcome back</Text>
 
       <TextInput
@@ -65,7 +65,7 @@ export function LoginScreen({ navigation }: Props) {
       {error && <Text style={styles.error}>{error}</Text>}
 
       <Pressable style={styles.primaryButton} onPress={handleSubmit} disabled={loading}>
-        {loading ? <ActivityIndicator color={colors.bg} /> : <Text style={styles.primaryButtonText}>Log In</Text>}
+        {loading ? <ActivityIndicator color={colors.onAccent} /> : <Text style={styles.primaryButtonText}>Log In</Text>}
       </Pressable>
 
       <Pressable onPress={() => navigation.navigate('SignUp')}>
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     marginTop: spacing.md,
   },
   primaryButtonText: {
-    color: colors.bg,
+    color: colors.onAccent,
     fontSize: 16,
     fontWeight: '800',
   },
